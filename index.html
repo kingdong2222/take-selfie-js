@@ -88,13 +88,13 @@
 							ctx.drawImage(img2, xOffset,yOffset, newWidth, newHeight,);
 							ctx.drawImage(img, 0, 0, c.width, c.height);
 							image_preview.src = reader.result;
-							// var download = document.getElementById('download');
-							// var dataURL = c.toDataURL();
-							// download.href = dataURL
-							// const time = new Date()
-							// download.download = 'video-' + time.getTime() + '.jpg'
-							// // document.getElementById('image-preview').src = dataURL
-							// download.innerHTML = 'Download'
+							var download = document.getElementById('download');
+							var dataURL = c.toDataURL();
+							download.href = dataURL
+							const time = new Date()
+							download.download = 'video-' + time.getTime() + '.jpg'
+							// document.getElementById('image-preview').src = dataURL
+							download.innerHTML = 'Download'
 						}
 					}
 					else if (type === 'video') {
