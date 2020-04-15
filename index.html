@@ -79,21 +79,36 @@
 								newHeight = c.height
 								newWidth = newHeight * rwh
 							} 
-							console.log('c width', c.width)
-							console.log('c height', c.height)
-							console.log('img width', newWidth)
-							console.log('img height', newHeight)
+							var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
+							var degrees = 0
+							if (orientation === "landscape-primary") {
+								degrees = 180
+							} else if (orientation === "landscape-secondary") {
+								degrees = -180
+							} else if (orientation === "portrait-secondary") {
+								degrees = 270
+							} else if (orientation === "portrait-primary") {
+								degrees = 90
+							} else if (orientation === undefined) {
+								degrees = 0
+							}
+
 							var xOffset = rwh > 1 ? ((c.width - newWidth) / 2) : 0;
 							var yOffset = rwh <= 1 ? ((c.height - newHeight) / 2 ) : 0;
+
 							var cx = xOffset + 0.5 * newWidth
 							var cy = yOffset + 0.5 * newHeight
+
 							ctx.translate(cx, cy);              //translate to center of shape
-							ctx.rotate( (Math.PI / 180) * 90);  //rotate 25 degrees.
+							ctx.rotate( (Math.PI / 180) * degrees);  //rotate 25 degrees.
 							ctx.translate(-cx, -cy);            //translate center back to 0,0
+
 							ctx.drawImage(img2, xOffset,yOffset, newWidth, newHeight,);
+
 							ctx.translate(cx, cy);              //translate to center of shape
-							ctx.rotate( (Math.PI / 180) * -90);  //rotate 25 degrees.
+							ctx.rotate( (Math.PI / 180) * -degrees);  //rotate 25 degrees.
 							ctx.translate(-cx, -cy);            //translate center back to 0,0
+
 							ctx.drawImage(img, 0, 0, c.width, c.height);
 							image_preview.src = reader.result;
 							var download = document.getElementById('download');
