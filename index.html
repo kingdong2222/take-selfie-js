@@ -91,15 +91,10 @@
 
 							function doOnOrientationChange()
 							{
-								if(window.orientation == 90){
-									degrees = -180
-									break
-								} else if(window.orientation == -90){
-									degrees = 180
-									break
-								} else {
-									degrees = 90
-									break
+								switch(window.orientation){
+									case -90: degrees = -180;break;
+									case 90: degrees = 180; break;
+									default: degrees = 90; break;
 								}
 							}
 							doOnOrientationChange();
