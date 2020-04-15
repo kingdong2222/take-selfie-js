@@ -67,37 +67,27 @@
 				var type = source.type.split('/')[0]
 				note += 'Type: ' + type + '\n'
 				reader.onload = () => {
-					image_preview.src = reader.result;
+					
 					if (type === 'image') {
 						var img2 = new Image();
 						img2.src = reader.result
-						img2.onloadend = () => {
+						img2.onload = () => {
 							var rwh = img2.width / img2.height
 							var newWidth = c.width
 							var newHeight = newWidth / rwh
-							var xOffset = 0
-							var yOffset = 0
 							if (rwh > 1) {
 								newHeight = c.height
-								newWidth = c.height * rwh
-								if(c.width > (c.height * rwh)){
-									xOffset = c.width - (c.height * rwh)
-								}else {
-									xOffset = (c.width - (c.height * rwh))*(-1)
-								}
-								yOffset = 0
-							} else {
-								newHeight = c.width * rwh
-								newWidth = c.width
-								xOffset = 0
-								if(c.height > (c.width * rwh)){
-									yOffset = c.height - (c.width * rwh)
-								} else {
-									yOffset = (c.height - (c.width * rwh))*(-1)
-								}
-							}
-							ctx.drawImage(img2, xOffset,yOffset, newWidth, newHeight);
+								newWidth = newHeight * rwh
+							} 
+							console.log('c width', c.width)
+							console.log('c height', c.height)
+							console.log('img width', newWidth)
+							console.log('img height', newHeight)
+							var xOffset = rwh > 1 ? ((c.width - newWidth) / 2) : 0;
+							var yOffset = rwh <= 1 ? ((c.height - newHeight) / 2 ) : 0;
+							ctx.drawImage(img2, xOffset,yOffset, newWidth, newHeight,);
 							ctx.drawImage(img, 0, 0, c.width, c.height);
+							image_preview.src = reader.result;
 							// var download = document.getElementById('download');
 							// var dataURL = c.toDataURL();
 							// download.href = dataURL
