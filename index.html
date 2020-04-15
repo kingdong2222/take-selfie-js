@@ -70,7 +70,7 @@
 						var img2 = new Image();
 						img2.src = reader.result
 						img2.onload = () => {
-							var rwh = img2.height / img2.width
+							var rwh = img2.width / img2.height
 							var newWidth = c.width
 							var newHeight = newWidth / rwh
 							if (rwh > 1) {
@@ -80,7 +80,7 @@
 							var xOffset = rwh > 1 ? ((c.width - newWidth) / 2) : 0;
 							var yOffset = rwh <= 1 ? ((c.height - newHeight) / 2) : 0;
 							ctx.drawImage(img2, xOffset,yOffset, newWidth, newHeight);
-							ctx.drawImage(img, 0, 0, c.width, c.height);
+							// ctx.drawImage(img, 0, 0, c.width, c.height);
 							// var download = document.getElementById('download');
 							// var dataURL = c.toDataURL();
 							// download.href = dataURL
