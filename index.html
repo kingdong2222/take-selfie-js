@@ -79,10 +79,11 @@
 								newHeight = c.height
 								newWidth = newHeight * rwh
 							} 
-							
+
 							var degrees = 0
 							function doOnOrientationChange()
 							{
+								alert(window.orientation)
 								switch(window.orientation) 
 								{  
 								case -90:
