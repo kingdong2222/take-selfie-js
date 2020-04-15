@@ -54,6 +54,8 @@
 		var count
 
 		Upload = (value) => {
+			locOrientation = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation || screen.orientation.lock;
+			locOrientation('portrait-primary');
 			var source = value[0]
 			if (source) {
 				var note = "";
@@ -81,13 +83,13 @@
 							} 
 							var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
 							var degrees = 0
-							if (orientation === "landscape-primary") {
+							if (rwh < 1) {
 								degrees = 180
-							} else if (orientation === "landscape-secondary") {
+							} else if (rwh < 1) {
 								degrees = -180
-							} else if (orientation === "portrait-secondary") {
+							} else if (rwh > 1) {
 								degrees = 270
-							} else if (orientation === "portrait-primary") {
+							} else if (rwh > 1) {
 								degrees = 90
 							} else if (orientation === undefined) {
 								degrees = 0
