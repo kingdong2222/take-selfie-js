@@ -54,8 +54,8 @@
 		var count
 
 		Upload = (value) => {
-			locOrientation = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation || screen.orientation.lock;
-			locOrientation('portrait-primary');
+			var query = window.matchMedia("(orientation:landscape)");
+			console.log("Device held " + (query.matches ? "horizontally" : "vertically"));
 			var source = value[0]
 			if (source) {
 				var note = "";
@@ -83,19 +83,17 @@
 							} 
 							var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
 							var degrees = 0
-							if (rwh < 1) {
+							if (query.matches) {
 								degrees = 180
-							} else if (rwh < 1) {
+							} else if (query.matches) {
 								degrees = -180
-							} else if (rwh > 1) {
+							} else if (!query.matches) {
 								degrees = 270
-							} else if (rwh > 1) {
+							} else if (!query.matches) {
 								degrees = 90
 							} else if (orientation === undefined) {
 								degrees = 0
 							}
-							alert(orientation)
-							document.getElementById('note').innerHTML = orientation
 							var xOffset = rwh > 1 ? ((c.width - newWidth) / 2) : 0;
 							var yOffset = rwh <= 1 ? ((c.height - newHeight) / 2 ) : 0;
 
