@@ -13,7 +13,7 @@
 <body>
 	<main class="main-body">
 		<h1>DEMO 2</h1>
-		<img src = '' id='image-preview' width="300" height="300" style="margin: 20px 0;"/>
+		<img src = '' id='image-preview' style="margin: 20px 0;width: 300px; height: 300px; object-fit: cover;"/>
 		<canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;">
 			Your browser does not support the HTML5 canvas tag.</canvas>
 		<div class="example-block">
@@ -71,19 +71,31 @@
 					if (type === 'image') {
 						var img2 = new Image();
 						img2.src = reader.result
-						img2.onload = () => {
+						img2.onloadend = () => {
 							var rwh = img2.width / img2.height
 							var newWidth = c.width
 							var newHeight = newWidth / rwh
+							var xOffset = 0
+							var yOffset = 0
 							if (rwh > 1) {
 								newHeight = c.height
 								newWidth = c.height * rwh
+								if(c.width > (c.height * rwh)){
+									xOffset = c.width - (c.height * rwh)
+								}else {
+									xOffset = (c.width - (c.height * rwh))*(-1)
+								}
+								yOffset = 0
 							} else {
 								newHeight = c.width * rwh
 								newWidth = c.width
+								xOffset = 0
+								if(c.height > (c.width * rwh)){
+									yOffset = c.height - (c.width * rwh)
+								} else {
+									yOffset = (c.height - (c.width * rwh))*(-1)
+								}
 							}
-							var xOffset = rwh > 1 ? ((c.width - newWidth) / 2) : 0;
-							var yOffset = rwh <= 1 ? ((c.height - newHeight) / 2) : 0;
 							ctx.drawImage(img2, xOffset,yOffset, newWidth, newHeight);
 							ctx.drawImage(img, 0, 0, c.width, c.height);
 							// var download = document.getElementById('download');
