@@ -13,23 +13,12 @@
 <body>
 	<main class="main-body">
 		<h1>DEMO 4.3.1</h1>
-		<canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;">
-			Your browser does not support the HTML5 canvas tag.</canvas>
-		<div class="example-block">
-			<input type="file" name="image" accept="image/*,video/*,capture=camera" id="image-camera"
-				onchange="Upload(files)">
-			<input type="file" name="image" accept="image/*,capture=camera" onchange="Upload(files)" id="upload-image">
-			<input type="file" name="image" accept="video/*,capture=camera" onchange="Upload(files)" id="upload-video">
-		</div>
-		<div id='action'>
-			<img src="https://img.icons8.com/material-sharp/100/000000/stack-of-photos.png" id='upload-image-button' />
-			<img src="https://img.icons8.com/material-sharp/100/000000/video.png" id='upload-video-button' />
-		</div>
-		<div>
-			<a id="download" href=""></a>
-		</div>
+		<!-- <canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;">
+			Your browser does not support the HTML5 canvas tag.</canvas> -->
+			<img src="" id='image-preview'/>
+	
 		<input type="file" name="image" accept="image/*,capture=camera" onchange="Upload(files)" id="upload-image">
-		<img src="" id='image-preview'/>
+		
 		<!-- <div id="preview">
 			<p id='count'></p>
 			<img id='image-preview' />
