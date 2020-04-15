@@ -92,7 +92,8 @@
 							} else if (orientation === undefined) {
 								degrees = 0
 							}
-
+							alert(orientation)
+							document.getElementById('note').innerHTML = orientation
 							var xOffset = rwh > 1 ? ((c.width - newWidth) / 2) : 0;
 							var yOffset = rwh <= 1 ? ((c.height - newHeight) / 2 ) : 0;
 
