@@ -113,8 +113,7 @@
 									break;
 								}
 							}
-							doOnOrientationChange();
-
+							window.addEventListener('orientationchange', doOnOrientationChange);
 							
 							image_preview.src = reader.result;
 							var download = document.getElementById('download');
