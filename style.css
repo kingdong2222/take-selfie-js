@@ -11,9 +11,9 @@ html, body{
 }
 
 img, video{
-    object-fit: contain;
-    max-width: 100%;
-    height: auto;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
 }
 
 #image-frame{

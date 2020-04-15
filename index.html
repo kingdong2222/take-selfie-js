@@ -77,7 +77,10 @@
 							var newHeight = newWidth / rwh
 							if (rwh > 1) {
 								newHeight = c.height
-								newWidth = newHeight * rwh
+								newWidth = c.height * rwh
+							} else {
+								newHeight = c.width * rwh
+								newWidth = c.width
 							}
 							var xOffset = rwh > 1 ? ((c.width - newWidth) / 2) : 0;
 							var yOffset = rwh <= 1 ? ((c.height - newHeight) / 2) : 0;
