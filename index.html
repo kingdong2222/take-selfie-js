@@ -34,10 +34,7 @@
 			<img id='image-preview' />
 			<video id='video-preview'></video>
 		</div> -->
-		<div id="absolute"></div>
-		<div id="alpha"></div>
-		<div id="beta"></div>
-		<div id="gamma"></div>
+		<div id="note"></div>
 	</main>
 
 
@@ -58,18 +55,7 @@
 
 		Upload = (value) => {
 			var query = window.matchMedia("(orientation:landscape)");
-			window.addEventListener("deviceorientation", handleOrientation, true);
-			function handleOrientation(event) {
-				var absolute = event.absolute;
-				var alpha    = event.alpha;
-				var beta     = event.beta;
-				var gamma    = event.gamma;
-
-				document.getElementById('absolute').innerHTML = absolute
-				document.getElementById('alpha').innerHTML = alpha
-				document.getElementById('beta').innerHTML = beta
-				document.getElementById('gamma').innerHTML = gamma
-			}
+			screen.orientation.lock("portrait-primary");
 			var source = value[0]
 			if (source) {
 				var note = "";
@@ -114,15 +100,15 @@
 							var cx = xOffset + 0.5 * newWidth
 							var cy = yOffset + 0.5 * newHeight
 
-							ctx.translate(cx, cy);              //translate to center of shape
-							ctx.rotate( (Math.PI / 180) * degrees);  //rotate 25 degrees.
-							ctx.translate(-cx, -cy);            //translate center back to 0,0
+							// ctx.translate(cx, cy);              //translate to center of shape
+							// ctx.rotate( (Math.PI / 180) * degrees);  //rotate 25 degrees.
+							// ctx.translate(-cx, -cy);            //translate center back to 0,0
 
 							ctx.drawImage(img2, xOffset,yOffset, newWidth, newHeight,);
 
-							ctx.translate(cx, cy);              //translate to center of shape
-							ctx.rotate( (Math.PI / 180) * -degrees);  //rotate 25 degrees.
-							ctx.translate(-cx, -cy);            //translate center back to 0,0
+							// ctx.translate(cx, cy);              //translate to center of shape
+							// ctx.rotate( (Math.PI / 180) * -degrees);  //rotate 25 degrees.
+							// ctx.translate(-cx, -cy);            //translate center back to 0,0
 
 							ctx.drawImage(img, 0, 0, c.width, c.height);
 							image_preview.src = reader.result;
