@@ -39,7 +39,11 @@
 
 	<!-- Reference to your JavaScript file -->
 	<script>
-		screen.orientation.lock("portrait-primary");
+		window.onload = () => {
+			screen.orientation.lock("portrait-primary");
+			alert(screen.orientation.type);
+		}
+		
 		document.getElementById('upload-image-button').onclick = () => document.getElementById('upload-image').click()
 		document.getElementById('upload-video-button').onclick = () => document.getElementById('upload-video').click()
 		var c = document.getElementById("myCanvas");
