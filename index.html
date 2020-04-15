@@ -8,6 +8,7 @@
 	<title>Take Selfi test</title>
 	<!-- Link to main style sheet -->
 	<link rel="stylesheet" href="style.css">
+	<link rel="manifest" href="manifest.json">
 </head>
 
 <body>
@@ -39,8 +40,6 @@
 
 	<!-- Reference to your JavaScript file -->
 	<script>
-		screen.orientation.lock("portrait-primary");
-		alert(screen.orientation.type);
 		
 		document.getElementById('upload-image-button').onclick = () => document.getElementById('upload-image').click()
 		document.getElementById('upload-video-button').onclick = () => document.getElementById('upload-video').click()
