@@ -92,26 +92,29 @@
 							function doOnOrientationChange()
 							{
 								switch(window.orientation){
-									case -90: degrees = 0;break;
-									case 90: degrees = 90; break;
-									case 0: degrees = 90; break;
-									default: degrees = 0; break;
+									case 0: {
+										ctx.translate(cx, cy);              //translate to center of shape
+										ctx.rotate( (Math.PI / 180) * 90);
+										ctx.translate(-cx, -cy);            //translate center back to 0,0
+
+										ctx.drawImage(img2, xOffset,yOffset, newWidth, newHeight,);
+
+										ctx.translate(cx, cy);              //translate to center of shape
+										ctx.rotate( (Math.PI / 180) * -90);
+										ctx.translate(-cx, -cy);            //translate center back to 0,0
+
+										ctx.drawImage(img, 0, 0, c.width, c.height);
+									}
+									break;
+									default: {        
+										ctx.drawImage(img2, xOffset,yOffset, newWidth, newHeight,);
+										ctx.drawImage(img, 0, 0, c.width, c.height);
+									}
+									break;
 								}
 							}
 							doOnOrientationChange();
-							window.addEventListener('orientationchange', doOnOrientationChange);
 
-							ctx.translate(cx, cy);              //translate to center of shape
-							ctx.rotate( (Math.PI / 180) * degrees);
-							ctx.translate(-cx, -cy);            //translate center back to 0,0
-
-							ctx.drawImage(img2, xOffset,yOffset, newWidth, newHeight,);
-
-							ctx.translate(cx, cy);              //translate to center of shape
-							ctx.rotate( (Math.PI / 180) * -degrees);
-							ctx.translate(-cx, -cy);            //translate center back to 0,0
-
-							ctx.drawImage(img, 0, 0, c.width, c.height);
 							
 							image_preview.src = reader.result;
 							var download = document.getElementById('download');
