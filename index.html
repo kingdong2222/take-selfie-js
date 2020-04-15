@@ -81,18 +81,6 @@
 							} 
 
 							var degrees = 0
-							function doOnOrientationChange()
-							{
-								if(window.orientation == 90){
-									degrees = -90
-								} else if(window.orientation == -90){
-									degrees = 180
-								} else {
-									degrees = 90
-								}
-							}
-							doOnOrientationChange();
-							window.addEventListener('orientationchange', doOnOrientationChange);
 
 							var xOffset = rwh > 1 ? ((c.width - newWidth) / 2) : 0;
 							var yOffset = rwh <= 1 ? ((c.height - newHeight) / 2 ) : 0;
@@ -100,17 +88,25 @@
 							var cx = xOffset + 0.5 * newWidth
 							var cy = yOffset + 0.5 * newHeight
 
-							ctx.translate(cx, cy);              //translate to center of shape
-							ctx.rotate( (Math.PI / 180) * degrees);  //rotate 25 degrees.
-							ctx.translate(-cx, -cy);            //translate center back to 0,0
 
-							ctx.drawImage(img2, xOffset,yOffset, newWidth, newHeight,);
+							function doOnOrientationChange()
+							{
+								if(window.orientation == 90){
+									degrees = -180
+									break
+								} else if(window.orientation == -90){
+									degrees = 180
+									break
+								} else {
+									degrees = 90
+									break
+								}
+							}
+							doOnOrientationChange();
+							window.addEventListener('orientationchange', doOnOrientationChange);
 
-							ctx.translate(cx, cy);              //translate to center of shape
-							ctx.rotate( (Math.PI / 180) * -degrees);  //rotate 25 degrees.
-							ctx.translate(-cx, -cy);            //translate center back to 0,0
-
-							ctx.drawImage(img, 0, 0, c.width, c.height);
+							
+							
 							image_preview.src = reader.result;
 							var download = document.getElementById('download');
 							var dataURL = c.toDataURL();
