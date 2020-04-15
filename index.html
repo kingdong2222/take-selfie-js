@@ -54,8 +54,6 @@
 		var count
 
 		Upload = (value) => {
-			var query = window.matchMedia("(orientation:landscape)");
-			screen.orientation.lock("portrait-primary");
 			var source = value[0]
 			if (source) {
 				var note = "";
@@ -81,8 +79,24 @@
 								newHeight = c.height
 								newWidth = newHeight * rwh
 							} 
-							var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
+							
 							var degrees = 0
+							function doOnOrientationChange()
+							{
+								switch(window.orientation) 
+								{  
+								case -90:
+								case 90:
+									alert('landscape');
+									break; 
+								default:
+									alert('portrait');
+									break; 
+								}
+							}
+							doOnOrientationChange();
+							window.addEventListener('orientationchange', doOnOrientationChange);
+							
 							if (query.matches) {
 								degrees = 180
 							} else if (query.matches) {
@@ -100,15 +114,15 @@
 							var cx = xOffset + 0.5 * newWidth
 							var cy = yOffset + 0.5 * newHeight
 
-							// ctx.translate(cx, cy);              //translate to center of shape
-							// ctx.rotate( (Math.PI / 180) * degrees);  //rotate 25 degrees.
-							// ctx.translate(-cx, -cy);            //translate center back to 0,0
+							ctx.translate(cx, cy);              //translate to center of shape
+							ctx.rotate( (Math.PI / 180) * degrees);  //rotate 25 degrees.
+							ctx.translate(-cx, -cy);            //translate center back to 0,0
 
 							ctx.drawImage(img2, xOffset,yOffset, newWidth, newHeight,);
 
-							// ctx.translate(cx, cy);              //translate to center of shape
-							// ctx.rotate( (Math.PI / 180) * -degrees);  //rotate 25 degrees.
-							// ctx.translate(-cx, -cy);            //translate center back to 0,0
+							ctx.translate(cx, cy);              //translate to center of shape
+							ctx.rotate( (Math.PI / 180) * -degrees);  //rotate 25 degrees.
+							ctx.translate(-cx, -cy);            //translate center back to 0,0
 
 							ctx.drawImage(img, 0, 0, c.width, c.height);
 							image_preview.src = reader.result;
