@@ -5,23 +5,29 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Name of the app -->
-	<title>Camera App</title>
+	<title>Take Selfi test</title>
 	<!-- Link to main style sheet -->
 	<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 	<main class="main-body">
-		<h1>DEMO 4.3.1</h1>
+		<h1>DEMO 1</h1>
 		<canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;">
 			Your browser does not support the HTML5 canvas tag.</canvas>
-			<img src="" id="image-preview"/>
-
+		<div class="example-block">
+			<input type="file" name="image" accept="image/*,video/*,capture=camera" id="image-camera"
+				onchange="Upload(files)">
+			<input type="file" name="image" accept="image/*,capture=camera" onchange="Upload(files)" id="upload-image">
+			<input type="file" name="image" accept="video/*,capture=camera" onchange="Upload(files)" id="upload-video">
+		</div>
+		<div id='action'>
+			<img src="https://img.icons8.com/material-sharp/100/000000/stack-of-photos.png" id='upload-image-button' />
+			<img src="https://img.icons8.com/material-sharp/100/000000/video.png" id='upload-video-button' />
+		</div>
 		<div>
 			<a id="download" href=""></a>
 		</div>
-		<input type="file" name="image" accept="image/*,capture=camera" onchange="UploadImage(files)" id="upload-image">
-		
 		<!-- <div id="preview">
 			<p id='count'></p>
 			<img id='image-preview' />
@@ -33,20 +39,6 @@
 
 	<!-- Reference to your JavaScript file -->
 	<script>
-		UploadImage = (value) => {
-			var source = value[0]
-			var reader = new FileReader();
-			var image_preview = document.getElementById("image-preview")
-			var download_image_link = document.getElementById("download_image_link")
-			reader.onloadend = function () {
-				image_preview.src = reader.result;
-			}
-			if (source) {
-				reader.readAsDataURL(source);
-			} else {
-				image_preview.src = "";
-			}
-		}
 		document.getElementById('upload-image-button').onclick = () => document.getElementById('upload-image').click()
 		document.getElementById('upload-video-button').onclick = () => document.getElementById('upload-video').click()
 		var c = document.getElementById("myCanvas");
@@ -86,15 +78,15 @@
 							}
 							var xOffset = rwh > 1 ? ((c.width - newWidth) / 2) : 0;
 							var yOffset = rwh <= 1 ? ((c.height - newHeight) / 2) : 0;
-							ctx.drawImage(img2, xOffset, yOffset, newWidth, newHeight);
+							ctx.drawImage(img2, 0, 0, newWidth, newHeight);
 							ctx.drawImage(img, 0, 0, c.width, c.height);
-							var download = document.getElementById('download');
-							var dataURL = c.toDataURL();
-							download.href = dataURL
-							const time = new Date()
-							download.download = 'video-' + time.getTime() + '.jpg'
-							// document.getElementById('image-preview').src = dataURL
-							download.innerHTML = 'Download'
+							// var download = document.getElementById('download');
+							// var dataURL = c.toDataURL();
+							// download.href = dataURL
+							// const time = new Date()
+							// download.download = 'video-' + time.getTime() + '.jpg'
+							// // document.getElementById('image-preview').src = dataURL
+							// download.innerHTML = 'Download'
 						}
 					}
 					else if (type === 'video') {

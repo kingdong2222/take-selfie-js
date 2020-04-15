@@ -25,6 +25,6 @@ img, video{
     flex-direction: column;
 }
 
-#image-camera, #upload-video{
+#image-camera, #upload-image, #upload-video{
     display: none;
 }
