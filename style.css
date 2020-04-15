@@ -1,0 +1,30 @@
+html, body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.main-body{
+    /* padding: 0 1rem; */
+    text-align: center;
+}
+
+img, video{
+    object-fit: contain;
+    max-width: 100%;
+    height: auto;
+}
+
+#image-frame{
+    left: 0;
+}
+
+.example-block{
+    display: flex;
+    flex-direction: column;
+}
+
+#image-camera, #upload-image, #upload-video{
+    display: none;
+}

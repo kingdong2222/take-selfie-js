@@ -1,49 +1,170 @@
-<!DOCTYPE html>
-<html>
+<html lang=”en”>
 
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Demo: Take a Selfie With JavaScript</title>
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css">
-
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Name of the app -->
+	<title>Camera App</title>
+	<!-- Link to main style sheet -->
+	<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+	<main class="main-body">
+		<h1>DEMO 4.3.1</h1>
+		<canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;">
+			Your browser does not support the HTML5 canvas tag.</canvas>
+		<div class="example-block">
+			<input type="file" name="image" accept="image/*,video/*,capture=camera" id="image-camera"
+				onchange="Upload(files)">
+			<input type="file" name="image" accept="image/*,capture=camera" onchange="Upload(files)" id="upload-image">
+			<input type="file" name="image" accept="video/*,capture=camera" onchange="Upload(files)" id="upload-video">
+		</div>
+		<div id='action'>
+			<img src="https://img.icons8.com/material-sharp/100/000000/stack-of-photos.png" id='upload-image-button' />
+			<img src="https://img.icons8.com/material-sharp/100/000000/video.png" id='upload-video-button' />
+		</div>
+		<div>
+			<a id="download" href=""></a>
+		</div>
+		<input type="file" name="image" accept="image/*,capture=camera" onchange="Upload(files)" id="upload-image">
+		<img src="" id='image-preview'/>
+		<!-- <div id="preview">
+			<p id='count'></p>
+			<img id='image-preview' />
+			<video id='video-preview'></video>
+		</div> -->
+		<div id="note"></div>
+	</main>
 
 
-<h3>Demo: Take a Selfie With JavaScript</h3>
+	<!-- Reference to your JavaScript file -->
+	<script>
+		UploadImage = (value) => {
+			var source = value[0]
+			var reader = new FileReader();
+			var image_preview = document.getElementById("image-preview")
+			var download_image_link = document.getElementById("download_image_link")
+			reader.onloadend = function () {
+				image_preview.src = reader.result;
+			}
+			if (source) {
+				reader.readAsDataURL(source);
+			} else {
+				image_preview.src = "";
+			}
+		}
+		document.getElementById('upload-image-button').onclick = () => document.getElementById('upload-image').click()
+		document.getElementById('upload-video-button').onclick = () => document.getElementById('upload-video').click()
+		var c = document.getElementById("myCanvas");
+		// c.onclick = () => document.getElementById('image-camera').click()
+		var ctx = c.getContext("2d");
+		var img = new Image()
+		img.src = './images/fameimage.png'
+		onload = () => ctx.drawImage(img, 0, 0, c.width, c.height);
+		var i;
+		var video
+		var count
 
-<div class="container">
+		Upload = (value) => {
+			var source = value[0]
+			if (source) {
+				var note = "";
+				if (video) video.pause()
+				if (i) learInterval(i);
+				if (count) clearTimeout(count)
+				ctx.clearRect(0, 0, c.width, c.height);
+				ctx.drawImage(img, 0, 0, c.width, c.height);
+				var reader = new FileReader();
+				reader.readAsDataURL(source);
+				var type = source.type.split('/')[0]
+				note += 'Type: ' + type + '\n'
+				reader.onload = () => {
+					if (type === 'image') {
+						var img2 = new Image();
+						img2.src = reader.result
+						img2.onload = () => {
+							var rwh = img2.width / img2.height
+							var newWidth = c.width
+							var newHeight = newWidth / rwh
+							if (rwh > 1) {
+								newHeight = c.height
+								newWidth = newHeight * rwh
+							}
+							var xOffset = rwh > 1 ? ((c.width - newWidth) / 2) : 0;
+							var yOffset = rwh <= 1 ? ((c.height - newHeight) / 2) : 0;
+							ctx.drawImage(img2, xOffset, yOffset, newWidth, newHeight);
+							ctx.drawImage(img, 0, 0, c.width, c.height);
+							var download = document.getElementById('download');
+							var dataURL = c.toDataURL();
+							download.href = dataURL
+							const time = new Date()
+							download.download = 'video-' + time.getTime() + '.jpg'
+							// document.getElementById('image-preview').src = dataURL
+							download.innerHTML = 'Download'
+						}
+					}
+					else if (type === 'video') {
+						video = document.createElement('VIDEO')
+						video.muted = true
+						video.src = reader.result
+						video.play()
+						const chunks = [];
+						const stream = c.captureStream();
+						const rec = new MediaRecorder(stream);
+						rec.ondataavailable = e => chunks.push(e.data);
+						rec.start();
+						video.onloadeddata = () => {
+							note += 'start \n'
+							// console.log(video.duration);
+							var rwh = video.videoWidth / video.videoHeight
+							var newWidth = c.width
+							var newHeight = newWidth / rwh
+							if (rwh > 1) {
+								newHeight = c.height
+								newWidth = newHeight * rwh
+							}
+							var xOffset = rwh > 1 ? ((c.width - newWidth) / 2) : 0;
+							var yOffset = rwh <= 1 ? ((c.height - newHeight) / 2) : 0;
+							var x = 0;
+							document.getElementById('note').appendChild = note
+							i = setInterval(() => {
+								ctx.drawImage(video, xOffset, yOffset, newWidth, newHeight);
+								ctx.drawImage(img, 0, 0, c.width, c.height)
+							}, 20);
+							// var x = 0;
+							// var ratio = 100 / video.duration
+							// count = setInterval(() => {
+							// 	x += ratio
+							// 	document.getElementById('download').innerText = x.toFixed(2) + '% for download'
+							// }, 1000);
+						}
+						// video.onended = () => {
+						// 	clearInterval(i);
+						// 	clearTimeout(count)
+						// 	document.getElementById('download').innerText = '100%'
+						// 	rec.onstop = e => {
+						// 		console.log()
+						// 		exportVid(new Blob(chunks, { type: 'video/mp4' }))
+						// 	};
+						// 	rec.stop()
+						// }
+					}
+					else {
+						alert('File not supported')
+					}
+				}
+			}
+		}
 
-  <div class="app">
-
-    <a href="#" id="start-camera" class="visible">Touch here to start the app.</a>
-    <video id="camera-stream"></video>
-    <img id="snap">
-
-    <p id="error-message"></p>
-
-    <div class="controls">
-      <a href="#" id="delete-photo" title="Delete Photo" class="disabled"><i class="material-icons">delete</i></a>
-      <a href="#" id="take-photo" title="Take Photo"><i class="material-icons">camera_alt</i></a>
-      <a href="#" id="download-photo" download="selfie.png" title="Save Photo" class="disabled"><i class="material-icons">file_download</i></a>  
-    </div>
-
-    <!-- Hidden canvas element. Used for taking snapshot of video. -->
-    <canvas></canvas>
-
-  </div>
-
-</div>
-
-
-<script src="assets/js/script.js"></script>
-
+		exportVid = (blob) => {
+			document.getElementById('download').innerText = 'Download'
+			// const vid = document.getElementById('video-preview')
+			// vid.src = URL.createObjectURL(blob)
+			// vid.play()
+		}
+	</script>
 </body>
 
 </html>
