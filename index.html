@@ -84,31 +84,17 @@
 							function doOnOrientationChange()
 							{
 								alert(window.orientation)
-								switch(window.orientation) 
-								{  
-								case -90:
-								case 90:
-									alert('landscape');
-									break; 
-								default:
-									alert('portrait');
-									break; 
+								if(window.orientation == 90){
+									degrees = -180
+								} else if(window.orientation == -90){
+									degrees = 180
+								} else {
+									degrees = 90
 								}
 							}
 							doOnOrientationChange();
 							window.addEventListener('orientationchange', doOnOrientationChange);
-							
-							if (query.matches) {
-								degrees = 180
-							} else if (query.matches) {
-								degrees = -180
-							} else if (!query.matches) {
-								degrees = 270
-							} else if (!query.matches) {
-								degrees = 90
-							} else if (orientation === undefined) {
-								degrees = 0
-							}
+
 							var xOffset = rwh > 1 ? ((c.width - newWidth) / 2) : 0;
 							var yOffset = rwh <= 1 ? ((c.height - newHeight) / 2 ) : 0;
 
