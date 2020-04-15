@@ -12,7 +12,8 @@
 
 <body>
 	<main class="main-body">
-		<h1>DEMO 1</h1>
+		<h1>DEMO 2</h1>
+		<img src = '' id='image-preview' width="300" height="300" style="margin: 20px 0;"/>
 		<canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;">
 			Your browser does not support the HTML5 canvas tag.</canvas>
 		<div class="example-block">
@@ -39,9 +40,9 @@
 
 	<!-- Reference to your JavaScript file -->
 	<script>
-		
 		document.getElementById('upload-image-button').onclick = () => document.getElementById('upload-image').click()
 		document.getElementById('upload-video-button').onclick = () => document.getElementById('upload-video').click()
+		var image_preview = document.getElementById("image-preview")
 		var c = document.getElementById("myCanvas");
 		// c.onclick = () => document.getElementById('image-camera').click()
 		var ctx = c.getContext("2d");
@@ -66,6 +67,7 @@
 				var type = source.type.split('/')[0]
 				note += 'Type: ' + type + '\n'
 				reader.onload = () => {
+					image_preview.src = reader.result;
 					if (type === 'image') {
 						var img2 = new Image();
 						img2.src = reader.result
@@ -79,12 +81,7 @@
 							}
 							var xOffset = rwh > 1 ? ((c.width - newWidth) / 2) : 0;
 							var yOffset = rwh <= 1 ? ((c.height - newHeight) / 2) : 0;
-							ctx.drawImage(
-								img2, 
-								(img2.width - newWidth) / 2,
-								(img2.height - newHeight) / 2, 
-								newWidth, 
-								newHeight);
+							ctx.drawImage(img2, xOffset,yOffset, newWidth, newHeight);
 							ctx.drawImage(img, 0, 0, c.width, c.height);
 							// var download = document.getElementById('download');
 							// var dataURL = c.toDataURL();
