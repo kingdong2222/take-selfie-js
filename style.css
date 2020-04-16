@@ -1,30 +1,151 @@
+
 html, body{
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
+  font-family: 'Montserrat', sans-serif;
 }
-
+h2,h4,p{
+    margin-block-end:0;
+    margin-block-start: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+}
 .main-body{
-    /* padding: 0 1rem; */
-    text-align: center;
+    background: url('images/background.png') center center no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow-x: hidden;
 }
-
-img, video{
-    object-fit: contain;
-    max-width: 100%;
-    height: auto;
+.logo{
+    max-width: 32%;
+    padding-left: 20px;
+    padding-top: 20px;
 }
-
-#image-frame{
-    left: 0;
+.group-title{
+    max-width: 60%;
+    margin: 0 auto;
+    padding-top: 25px;
 }
-
-.example-block{
+.fb-image-frame{
+    max-width: 90%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+.like-blur{
+    position: absolute;
+    top: 27%;
+    right: -12%;
+    max-width: 30%;
+}
+.heart{
+    position: absolute;
+    max-width: 15.6%;
+    top: 50%;
+    right: 6%;
+}
+.group-button{
+    display: flex;
+    max-width: 90%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+.button{
+    min-width: 25%;
+    height: 100%;
+}
+.reward-group{
+    display: flex;
+    max-width: 90%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.reward-content{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.reward-group .reward-content img{
+    max-width: 100%;
+}
+.reward-group .reward-content h4{
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #fff
+}
+.reward-group .reward-content p{
+    color: #fff;
+    font-size: 9px;
 }
 
-#image-camera, #upload-image, #upload-video{
-    display: none;
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1;
+    padding-top: 66%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto; 
+    overflow-x: hidden;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
 }
+
+.modal img{
+    top: -2%;
+    left: -23%;
+    width: 145%;
+    object-fit: contain;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 1;
+}
+  
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    width: 63%;
+    height: 38%;
+    overflow-y: auto;
+    z-index: 10;
+    position: relative;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+}
+/* .modal-content:before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(to right,#fbc247, #ef3911);
+    width: 80%;
+    height: 60%;
+} */
+  
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
