@@ -1,10 +1,9 @@
-
 html, body{
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  font-family: 'Montserrat', sans-serif;
+margin: 0;
+padding: 0;
+height: 100%;
+width: 100%;
+font-family: 'Montserrat', sans-serif;
 }
 h2,h4,p{
     margin-block-end:0;
@@ -34,18 +33,25 @@ h2,h4,p{
     max-width: 90%;
     margin: 0 auto;
     padding-top: 20px;
+    position: relative;
+}
+.fb-image-frame svg{
+    position: relative;
+    z-index: 2;
 }
 .like-blur{
     position: absolute;
     top: 27%;
     right: -12%;
     max-width: 30%;
+    z-index: 3;
 }
 .heart{
     position: absolute;
     max-width: 15.6%;
     top: 50%;
     right: 6%;
+    z-index: 3;
 }
 .group-button{
     display: flex;
@@ -86,12 +92,14 @@ h2,h4,p{
     color: #fff;
     font-size: 9px;
 }
-
+.poster-only-desktop{
+    display: none;
+}
 .modal {
     display: none; 
     position: fixed;
-    z-index: 1;
-    padding-top: 66%;
+    z-index: 5;
+    padding-top: 80px;
     left: 0;
     top: 0;
     width: 100%;
@@ -100,30 +108,162 @@ h2,h4,p{
     overflow-x: hidden;
     background-color: rgba(0,0,0,0.4);
 }
-  
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    width: 63%;
-    height: 38%;
-    overflow-y: auto;
-    z-index: 10;
+.modal img{
+    width: 100%;
+    object-fit: contain;
     position: relative;
-    border-bottom-left-radius: 2rem;
-    border-bottom-right-radius: 2rem;
+    z-index: 1000;
+    max-width: 330px;
+    margin: 0 auto;
+    margin-bottom: -60px;
+    display: block;
 }
-  
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-  
-.close:hover,
-.close:focus {
+
+.modal-content {
+    width: 75%;
+    height: 50%;
+    margin: auto;
+    max-width: 22em;
+    position: relative;
+    box-sizing: border-box;
     color: #000;
-    text-decoration: none;
-    cursor: pointer;
+    background: #fff;
+    background-clip: padding-box;
+    border: solid 5px transparent;
+    border-radius: 2.5em;
 }
+
+.modal-content::before{
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -1;
+    margin: -5px;
+    border-radius: inherit;
+    background: linear-gradient(to right, #fbc247, #ef3911);
+}
+
+.modal-content-1 {
+    width: 99%;
+    height: 70%;
+    margin: auto;
+    max-width: 22em;
+    position: relative;
+    color: #000;
+    background: #fff;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+
+.modal h2{
+    text-align: center;
+    text-transform: uppercase;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    background: linear-gradient(to right, #fbc247, #ef3911);
+    font-size: 26px;
+    font-weight: 600;
+    color: #fff;
+    /* position: absolute;
+    top: -1px;
+    left: -1px; */
+    width: 100.5%;
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    margin-top: -1px;
+}
+.white-dash{
+    background-color: #fff;
+    width: 100%;
+    height: 2px;
+    position: absolute;
+}
+.dash-0{
+    height: 5px;
+    top: 52px
+}
+.dash-1{
+    top: 60px;
+}
+
+.modal-content-1 .modal-container{
+    padding: 1rem 1rem 0 1rem;
+    margin-bottom: -1rem;
+}
+.modal-content-1 .modal-container .step{
+    margin-bottom: 1rem;
+}
+.modal-content-1 .modal-container .step p{
+    font-size: 12px;
+    line-height: 18px;
+    font-size: #555;
+}
+.modal-content-1 .modal-container .step .tag{
+    color: #2c82ff;
+    font-style: italic;
+    font-weight: 600;
+}
+.modal-content-1 .modal-container .step .title{
+    font-size: 16px;
+    font-weight: 900;
+    margin-bottom: 0.25rem;
+    color: #686868;
+}
+
+.modal-content-1::-webkit-scrollbar{
+    width: 6px;
+}
+.modal-content-1::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background-color: #f45f24;
+}
+.modal-content-1::-webkit-scrollbar-thumb{
+    background: #fff;
+    border-radius: 50px;
+}
+
+.modal .button-close{
+    width: 55%;
+    margin: 0 auto;
+    position: relative;
+    top: 7%;
+}
+#myCanvas{
+    outline: 1px solid #d3d3d3;
+    position: absolute;
+    top:13.25%;
+    left:10.25%;
+    z-index: 1;
+    /* background-color: #fff; */
+}
+@media only screen and (max-width: 320px){
+    .modal .button-close{
+        top: 1%;
+    }  
+    #myCanvas{
+        top:14%;
+    }
+}
+@media only screen and (min-width: 768px){
+    .modal .button-close{
+        top: 10%;
+    }
+    #myCanvas{
+        top: 11%;
+        left: 10.25%
+    }
+}
+@media only screen and (min-width: 1024px) {
+    main{
+        display: none;
+    }
+    .poster-only-desktop{
+        display: block;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
