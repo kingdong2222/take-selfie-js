@@ -926,12 +926,30 @@
 			return image;
 		}
 
-		document.getElementById('myBtnModal').onclick= function(){
-			modal.style.display = "block";
-			var image = convertCanvasToImage(document.getElementById("myCanvas"));
-			download(image.src, 'image', 'png');
-		}
+		// document.getElementById('myBtnModal').onclick= function(){
+		// 	modal.style.display = "block";
+		// 	var image = convertCanvasToImage(document.getElementById("myCanvas"));
+		// 	download(image.src, 'image', 'png');
+		// }
 
+		UploadVideo = (value) => {
+			var source = value[0]
+			var reader = new FileReader();
+			var video_preview = document.getElementById("video-preview")
+			reader.onloadend = function () {
+				video_preview.src = reader.result;
+				document.getElementById('myBtnModal').onclick= function(){
+					modal.style.display = "block";
+					download(video_preview.src, 'video', 'mp4');
+				}
+			}
+			if (source) {
+				reader.readAsDataURL(source);
+			} else {
+				video_preview.src = "";
+			}
+			
+		}
 	</script>
 </body>
 
