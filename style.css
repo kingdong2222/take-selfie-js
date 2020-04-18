@@ -272,7 +272,17 @@ h2,h4,p{
         display: block;
         height: 100%;
         width: 100%;
+        position: relative;
+    }
+    .poster-only-desktop .poster{
         object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+    .poster-only-desktop .logo{
+        position: absolute;
+        top: 5%;
+        left: 5%;
     }
 }
 
