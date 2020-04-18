@@ -929,7 +929,7 @@
 		document.getElementById('myBtnModal').onclick= function(){
 			modal.style.display = "block";
 			var image = convertCanvasToImage(document.getElementById("myCanvas"));
-			download(image, 'image', 'png');
+			download(image.src, 'image', 'png');
 		}
 
 	</script>
