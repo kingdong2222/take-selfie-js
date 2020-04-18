@@ -772,7 +772,25 @@
 	<!-- Reference to your JavaScript file -->
 	<script>
 
-		
+		//open popup
+		var modal = document.getElementById("myModal");
+
+		var btn = document.getElementById("myBtnModal");
+
+		var span = document.getElementsByClassName("close")[0];
+
+		btn.onclick = function () {
+			modal.style.display = "block";
+		}
+
+		span.onclick = function () {
+			modal.style.display = "none";
+		}
+		window.onclick = function (event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
 
 		//upload image
 		const imageCamera = document.getElementById('image-camera')
@@ -906,6 +924,7 @@
 		}
 
 		document.getElementById('myBtnModal').onclick= function(){
+			modal.style.display = "block";
 			var image = convertCanvasToImage(document.getElementById("myCanvas"));
 			var anchor = document.createElement('a');
 
@@ -913,26 +932,6 @@
 			anchor.setAttribute('href', image.src);
 			anchor.setAttribute('download', 'image.png');
 			anchor.click();
-
-			//open popup
-			var modal = document.getElementById("myModal");
-
-			var btn = document.getElementById("myBtnModal");
-
-			var span = document.getElementsByClassName("close")[0];
-
-			btn.onclick = function () {
-				modal.style.display = "block";
-			}
-
-			span.onclick = function () {
-				modal.style.display = "none";
-			}
-			window.onclick = function (event) {
-				if (event.target == modal) {
-					modal.style.display = "none";
-				}
-			}
 		}
 
 	</script>
