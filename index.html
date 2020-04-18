@@ -916,6 +916,23 @@
 		}
 		//upload image
 
+		// Converts canvas to an image
+		function convertCanvasToImage(canvas) {
+			var image = new Image();
+			image.src = canvas.toDataURL("image/png");
+			return image;
+		}
+
+		document.getElementById('mydownload').onclick= function(){
+			var image = convertCanvasToImage(document.getElementById("myCanvas"));
+			var anchor = document.createElement('a');
+
+			console.log(anchor);
+			anchor.setAttribute('href', image.src);
+			anchor.setAttribute('download', 'image.png');
+			anchor.click();
+		}
+
 	</script>
 </body>
 
