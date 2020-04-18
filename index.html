@@ -532,7 +532,7 @@
 					</g>
 				</svg>
 			</div>
-			<div class='button upload-file'  >
+			<div class='button upload-file'  id="upload-file">
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 88 59">
 					<defs>
 						<style>
@@ -759,8 +759,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="action" style="display: none;">
+		<div class="action" >
 			<div><input type="file" name="" accept="image/*" id='upload-image'></div>
+			<video id="video-preview" height="300" controls></video>
+			<input type="file" name="video" accept="video/*" onchange="UploadVideo(files)">
 		</div>
 		<div>
 			<!-- <canvas width="300" height="300" id="myCanvas" style="outline:1px solid #d3d3d3;">
@@ -771,6 +773,30 @@
 
 	<!-- Reference to your JavaScript file -->
 	<script>
+
+
+		UploadVideo = (value) => {
+			var source = value[0]
+			var reader = new FileReader();
+			var video_preview = document.getElementById("video-preview")
+			reader.onloadend = function () {
+				video_preview.src = reader.result;
+				document.getElementById('myBtnModal').onclick= function(){
+					modal.style.display = "block";
+					var anchor = document.createElement('a');
+
+					anchor.setAttribute('href',video_preview.src );
+					anchor.setAttribute('download', 'video.mp4');
+					anchor.click();
+				}
+			}
+			if (source) {
+				reader.readAsDataURL(source);
+			} else {
+				video_preview.src = "";
+			}
+			
+		}
 
 		//open popup
 		var modal = document.getElementById("myModal");
@@ -928,7 +954,6 @@
 			var image = convertCanvasToImage(document.getElementById("myCanvas"));
 			var anchor = document.createElement('a');
 
-			console.log(anchor);
 			anchor.setAttribute('href', image.src);
 			anchor.setAttribute('download', 'image.png');
 			anchor.click();
