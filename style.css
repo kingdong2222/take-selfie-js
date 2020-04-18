@@ -228,24 +228,32 @@ h2,h4,p{
     width: 55%;
     margin: 0 auto;
     position: relative;
-    top: 7%;
+    top: 0;
 }
 #myCanvas{
     outline: 1px solid #d3d3d3;
     position: absolute;
-    top:13.25%;
-    left:10.25%;
+    top:13%;
+    left:9.75%;
     z-index: 1;
-    /* background-color: #fff; */
+    background-color: #fff;
 }
+/* iphone 5 */
 @media only screen and (max-width: 320px){
     .modal .button-close{
         top: 1%;
     }  
     #myCanvas{
-        top:14%;
+        top:13.5%;
     }
 }
+/* iphone 6,7,8 plus */
+@media only screen and (min-width: 414px){
+    #myCanvas{
+        top:12%;
+    }
+}
+/* tablet */
 @media only screen and (min-width: 768px){
     .modal .button-close{
         top: 10%;
@@ -255,6 +263,7 @@ h2,h4,p{
         left: 10.25%
     }
 }
+/* desktop */
 @media only screen and (min-width: 1024px) {
     main{
         display: none;
