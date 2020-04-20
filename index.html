@@ -11,14 +11,15 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
 	<script src='download.js'></script>
+	<script src="./js/main.js"></script>
 </head>
 
 <body>
 	<div class='poster-only-desktop'>
 		<img class='logo' src='images/Logo.png' />
-		<img class='poster' src="images/poster-only-desktop.png"/>
+		<img class='poster' src="images/poster-only-desktop.png" />
 	</div>
-	<img class='poster-rotate' src="images/please_rotate_your_phone.png"/>
+	<img class='poster-rotate' src="images/please_rotate_your_phone.png" />
 	<main class="main-body">
 		<img class='logo' src='images/Logo.png' />
 		<div class='group-title'>
@@ -487,7 +488,7 @@
 		<img class='like-blur' src='images/like.png' />
 		<img class='heart' src='images/heart.png' />
 		<div class='group-button'>
-			<div class='button download-file' id="myBtnModal">
+			<div class='button download-file' id="download-file">
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 88 59">
 					<defs>
 						<style>
@@ -533,7 +534,7 @@
 					</g>
 				</svg>
 			</div>
-			<div class='button upload-file'  id="upload-file">
+			<div class='button upload-file' id="upload-file">
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 88 59">
 					<defs>
 						<style>
@@ -634,7 +635,7 @@
 					</g>
 				</svg>
 			</div>
-			<div class='button video-camera'>
+			<div class='button video-camera' id="video-camera">
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 87 59">
 					<defs>
 						<style>
@@ -718,18 +719,23 @@
 					<div class='modal-container'>
 						<div class="step">
 							<p class='title'>Bước 1</p>
-							<p class='text'>Xác định siêu năng lực của bạn! Đó là năng lực “nếm thử 1 lần là biết ngay cách nấu” hay “lo bao việc vẫn có thời gian làm ra những chiếc bánh ngọt siêu ngon tuyệt vời”, siêu năng lực của bạn là gì?</p>
+							<p class='text'>Xác định siêu năng lực của bạn! Đó là năng lực “nếm thử 1 lần là biết ngay
+								cách nấu” hay “lo bao việc vẫn có thời gian làm ra những chiếc bánh ngọt siêu ngon tuyệt
+								vời”, siêu năng lực của bạn là gì?</p>
 						</div>
 						<div class="step">
 							<p class='title'>Bước 2</p>
-							<p class='text'>Chụp hoặc quay lại (video tối đa 30 giây) siêu năng lực đó rồi vào [link] để tạo khung ảnh của Redoxon cho bài dự thi của mình. Bài dự thi có khung ảnh mới là bài dự thi hợp lệ.</p>
+							<p class='text'>Chụp hoặc quay lại (video tối đa 30 giây) siêu năng lực đó rồi vào [link] để
+								tạo khung ảnh của Redoxon cho bài dự thi của mình. Bài dự thi có khung ảnh mới là bài dự
+								thi hợp lệ.</p>
 							<p class='tag'>#RedoxonTripleAction</p>
 							<p class='tag'>#ViGiaDinhNhoLuonCanMe</p>
 						</div>
 						<div class="step">
 							<p class='title'>Bước 3</p>
 							<p class='text'>
-								Tải bài dự thi đã được lồng khung ảnh của Redoxon về rồi đăng trên trang cá nhân ở chế độ Public kèm hashtag
+								Tải bài dự thi đã được lồng khung ảnh của Redoxon về rồi đăng trên trang cá nhân ở chế
+								độ Public kèm hashtag
 								<p class='tag'>#Redoxon</p>
 								<p class='tag'>#ViGiaDinhNhoLuonCanMe</p>
 							</p>
@@ -743,27 +749,45 @@
 					</div>
 				</div>
 				<div class="close button-close">
-					<svg
-						xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110.12 32.92">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110.12 32.92">
 						<defs>
-							<style>.button-cls-1{fill:#2c82ff;}.button-cls-2{font-size:10px;fill:#fff;font-family:Montserrat-Medium, Montserrat;font-weight:500;}.button-cls-3{fill:none;stroke:#fff;stroke-linecap:round;stroke-miterlimit:10;stroke-width:4px;}</style>
+							<style>
+								.button-cls-1 {
+									fill: #2c82ff;
+								}
+
+								.button-cls-2 {
+									font-size: 10px;
+									fill: #fff;
+									font-family: Montserrat-Medium, Montserrat;
+									font-weight: 500;
+								}
+
+								.button-cls-3 {
+									fill: none;
+									stroke: #fff;
+									stroke-linecap: round;
+									stroke-miterlimit: 10;
+									stroke-width: 4px;
+								}
+							</style>
 						</defs>
 						<title>Asset 1</title>
 						<g id="Layer_2" data-name="Layer 2">
 							<g id="Layer_1-2" data-name="Layer 1">
-								<rect class="button-cls-1" width="110.12" height="32.92" rx="16.46"/>
+								<rect class="button-cls-1" width="110.12" height="32.92" rx="16.46" />
 								<text class="button-cls-2" transform="translate(31.18 19.46)">Xong</text>
-								<polyline class="button-cls-3" points="69.33 17.04 76.28 23.99 90.54 9.74"/>
+								<polyline class="button-cls-3" points="69.33 17.04 76.28 23.99 90.54 9.74" />
 							</g>
 						</g>
 					</svg>
 				</div>
 			</div>
 		</div>
-		<div class="action" >
-			<div><input type="file" name="" accept="image/*" id='upload-image'></div>
-			<embed id="video-preview"  ></embed>
-			<input type="file" name="video" accept="video/*" onchange="UploadVideo(files)">
+		<div class="action" style="display: none;">
+			<input type="file" name="" accept="image/*" id='upload-image'>
+			<input type="file" name="" accept="video/*" id='upload-video'>
+			<input type="file" name="" accept="image/*,video/*" id='upload-all'>
 		</div>
 		<div>
 			<!-- <canvas width="300" height="300" id="myCanvas" style="outline:1px solid #d3d3d3;">
@@ -795,130 +819,6 @@
 			}
 		}
 
-		//upload image
-		const imageCamera = document.getElementById('image-camera')
-		const uploadImage = document.getElementById('upload-image')
-		imageCamera.onclick = () => uploadImage.click()
-
-		const canvas = document.getElementById("myCanvas");
-		const ctx = canvas.getContext("2d");
-		var canvas1 = document.getElementById("rotate-canvas");
-		var ctx1 = canvas1.getContext("2d");
-		const frame = new Image()
-		frame.src = './images/photoframe.png'
-
-		canvas.width = innerWidth * 0.71
-		canvas.height = innerWidth * 0.71
-		//convert base64 to array buffer
-		base64ToArrayBuffer = (base64) => {
-			base64 = base64.replace(/^data\:([^\;]+)\;base64,/gmi, '');
-			var binaryString = atob(base64);
-			var len = binaryString.length;
-			var bytes = new Uint8Array(len);
-			for (var i = 0; i < len; i++) {
-				bytes[i] = binaryString.charCodeAt(i);
-			}
-			return bytes.buffer;
-		}
-		//convert base64 to array buffer
-
-		//render canvas
-		renderCanvas = (image) => {
-			console.log(image)
-			const rwh = image.width / image.height
-			let newWidth = canvas.width
-			let newHeight = newWidth / rwh
-			if (rwh > 1) {
-				newHeight = canvas.height
-				newWidth = newHeight * rwh
-			}
-			const xOffset = rwh > 1 ? ((canvas.width - newWidth) / 2) : 0;
-			const yOffset = rwh <= 1 ? ((canvas.height - newHeight) / 2) : 0;
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			ctx.save();
-			ctx.drawImage(image, xOffset, yOffset, newWidth, newHeight);
-			ctx.drawImage(frame, 0, 0, canvas.width, canvas.height)
-			ctx.restore()
-			// loader.style.display = 'none'
-			// canvas.style.display = 'block'
-		}
-		//render canvas
-
-		//rotate image for mobile
-		drawRotated = (degrees, image) => {
-			let tempW = image.height
-			let tempH = image.width
-			let tempImageW;
-			let tempImageH;
-			switch (degrees) {
-				case -90:
-					tempImageW = 0
-					tempImageH = -tempW
-					break;
-				case 90:
-					tempImageW = -tempH
-					tempImageH = 0
-					break;
-				case 180:
-					tempW = image.width
-					tempH = image.height
-					tempImageW = 0
-					tempImageH = 0
-					break;
-				default:
-					tempW = image.width
-					tempH = image.height
-					tempImageW = -tempW
-					tempImageH = -tempH
-					break;
-			}
-			canvas1.width = tempW
-			canvas1.height = tempH
-			ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
-			ctx1.save();
-			ctx1.translate(canvas1.width, canvas1.height);
-			ctx1.rotate(degrees * Math.PI / 180);
-			ctx1.drawImage(image, tempImageW, tempImageH);
-			ctx1.restore();
-			var data = canvas1.toDataURL("image/jpg");
-			const tempImage = new Image()
-			tempImage.src = data
-			tempImage.onload = () => renderCanvas(tempImage)
-		}
-		//rotate image for mobile
-
-		uploadImage.onchange = (e) => {
-			const source = e.target.files[0]
-			const reader = new FileReader();
-			console.log(source)
-			reader.readAsDataURL(source);
-			// loader.style.display = 'block'
-			// canvas.style.display = 'none'
-			reader.onloadend = () => {
-				const preview = new Image();
-				preview.src = reader.result
-				preview.onload = () => {
-					const exif = EXIF.readFromBinaryFile(base64ToArrayBuffer(reader.result));
-					// document.getElementById('concat').innerText = exif.Orientation
-					switch (exif.Orientation) {
-						case 8:
-							drawRotated(-90, preview)
-							break;
-						case 3:
-							drawRotated(180, preview)
-							break;
-						case 6:
-							drawRotated(90, preview)
-							break;
-						default:
-							drawRotated(0, preview)
-							break;
-					}
-				}
-			}
-		}
-		//upload image
-
 		// Converts canvas to an image
 		function convertCanvasToImage(canvas) {
 			var image = new Image();
@@ -926,10 +826,11 @@
 			return image;
 		}
 
-		// document.getElementById('myBtnModal').onclick= function(){
+		//download image
+		// document.getElementById('download-file').onclick= function(){
 		// 	modal.style.display = "block";
 		// 	var image = convertCanvasToImage(document.getElementById("myCanvas"));
-		// 	download(image.src, 'image', 'png');
+		// 	download(image.src, 'image-redoxon', 'png');
 		// }
 
 		// function download format download(file.src,'name','type of file')
@@ -941,9 +842,11 @@
 			var video_preview = document.getElementById("video-preview")
 			reader.onloadend = function () {
 				video_preview.src = reader.result;
-				document.getElementById('myBtnModal').onclick= function(){
+
+				//download video
+				document.getElementById('download-file').onclick = function () {
 					modal.style.display = "block";
-					download(video_preview.src, 'video', 'mp4');
+					download(video_preview.src, 'video-redoxon', 'mp4');
 				}
 			}
 			if (source) {
@@ -951,7 +854,19 @@
 			} else {
 				video_preview.src = "";
 			}
-			
+
+		}
+
+		document.getElementById('download-file').onclick = function () {
+			modal.style.display = "block";
+			var image = convertCanvasToImage(document.getElementById("myCanvas"));
+			console.log(type_of_file)
+			// var anchor = document.createElement('a');
+
+			// console.log(anchor);
+			// anchor.setAttribute('href', image.src);
+			// anchor.setAttribute('download', 'image.png');
+			// anchor.click();
 		}
 	</script>
 </body>
