@@ -264,8 +264,8 @@ window.onload = () => {
     //handle add fram
 
     const video = document.createElement('VIDEO')
-    video.setAttribute('autoplay', '')
-    video.setAttribute('playsinline', '')
+    video.setAttribute('autoplay','')
+    video.setAttribute('playsinline','')
     video.muted = 'muted'
     video.setAttribute('preload', 'auto')
     // const playDiv = document.getElementById('playDiv')

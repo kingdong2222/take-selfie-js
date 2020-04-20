@@ -12,6 +12,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
 	<script src='download.js'></script>
 	<script src="./js/main.js"></script>
+	<script src="./js/canvastoBlob.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
 </head>
 
 <body>
@@ -797,10 +799,38 @@
 				Your browser does not support the HTML5 canvas tag.</canvas> -->
 			<canvas id="rotate-canvas" style="display: none;"></canvas><br>
 		</div>
+		<button onclick="screenshot()">get image</button>
 	</main>
 
 	<!-- Reference to your JavaScript file -->
 	<script>
+
+		function PNGSequence( canvas ){
+			this.canvas = canvas;
+			this.sequence = [];
+		};
+		PNGSequence.prototype.capture = function( fps ){
+			var cap = this;
+			this.sequence.length=0;
+			this.timer = setInterval(function(){
+				cap.sequence.push( cap.canvas.toDataURL() );
+			},1000/fps);
+		};
+		PNGSequence.prototype.stop = function(){
+			if (this.timer) clearInterval(this.timer);
+			delete this.timer;
+			return this.sequence;
+		};
+
+		var myCanvas = document.getElementById('myCanvas');
+		var recorder = new PNGSequence( myCanvas );
+		recorder.capture(15);
+
+		// Record 5 seconds
+		setTimeout(function(){
+		var thePNGDataURLs = recorder.stop();
+		}, 5000 );
+		alert(thePNGDataURLs)
 
 		//open popup
 		var modal = document.getElementById("myModal");
