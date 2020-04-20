@@ -799,7 +799,6 @@
 				Your browser does not support the HTML5 canvas tag.</canvas> -->
 			<canvas id="rotate-canvas" style="display: none;"></canvas><br>
 		</div>
-		<button onclick="screenshot()">get image</button>
 	</main>
 
 	<!-- Reference to your JavaScript file -->
@@ -830,7 +829,7 @@
 		setTimeout(function(){
 		var thePNGDataURLs = recorder.stop();
 		}, 5000 );
-		console.log(recorder.sequence)
+		console.log(recorder)
 
 		//open popup
 		var modal = document.getElementById("myModal");
