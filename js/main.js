@@ -1,12 +1,12 @@
 window.onload = () => {
-    let type_of_file //check type of file upload or capture
+    const playDiv = document.getElementById('playDiv')
+    playDiv.style.width = innerWidth * 0.71
+    playDiv.style.height = innerWidth * 0.71
 
     //upload image
     const imageCamera = document.getElementById('image-camera')
     const uploadImage = document.getElementById('upload-image')
     imageCamera.onclick = () => uploadImage.click()
-    type_of_file = 'image'
-    
 
     const canvas = document.getElementById("myCanvas");
     const ctx = canvas.getContext("2d");
@@ -101,6 +101,8 @@ window.onload = () => {
 
     handleUploadImage = (e) => {
         clearInterval(i)
+        video.src = ''
+        playDiv.style.display = 'none'
         const source = e.target.files[0]
         const reader = new FileReader();
         // console.log(source)
@@ -136,8 +138,6 @@ window.onload = () => {
     const videoCamera = document.getElementById('video-camera')
     const uploadVideo = document.getElementById('upload-video')
     videoCamera.onclick = () => uploadVideo.click()
-    type_of_file = 'video'
-    
 
     //handle rotate for mobile
     drawRotatedVideo = (degrees, image) => {
@@ -217,6 +217,27 @@ window.onload = () => {
     }
     //handle rotate for mobile
 
+    renderImageVideo = (image) => {
+        const rwh = image.videoWidth / image.videoHeight
+        let newWidth = canvas.width
+        let newHeight = newWidth / rwh
+        if (rwh > 1) {
+            newHeight = canvas.height
+            newWidth = newHeight * rwh
+        }
+        const xOffset = rwh > 1 ? ((canvas.width - newWidth) / 2) : 0;
+        const yOffset = rwh <= 1 ? ((canvas.height - newHeight) / 2) : 0;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // console.log(rwh, xOffset, yOffset, newWidth, newHeight)
+        // streaming(image.duration)
+        // i = setInterval(() => {
+        ctx.drawImage(image, xOffset, yOffset, newWidth, newHeight);
+        ctx.drawImage(frame, 0, 0, canvas.width, canvas.height)
+        // }, 20)
+        ctx.save();
+        ctx.restore()
+    }
+
     //handle add fram
     renderCanvasVideo = (image) => {
         const rwh = image.videoWidth / image.videoHeight
@@ -242,24 +263,37 @@ window.onload = () => {
     }
     //handle add fram
 
+    const video = document.createElement('VIDEO')
+    video.setAttribute('autoplay', '')
+    video.setAttribute('playsinline', '')
+    video.muted = 'muted'
+    video.setAttribute('preload', 'auto')
+    // const playDiv = document.getElementById('playDiv')
+    console.log(playDiv)
+    playDiv.onclick = () => {
+        playDiv.style.display = 'none'
+        video.play()
+        renderCanvasVideo(video)
+    }
+    video.onended = () => {
+        clearInterval(i)
+        playDiv.style.display = 'flex'
+    }
+
     //handle upload video
     uploadVideo.onchange = (e) => handleUploadVideo(e)
     handleUploadVideo = (value) => {
+        video.src = ''
         clearInterval(i)
         var source = value.target.files[0]
         const reader = new FileReader();
-        reader.readAsDataURL(source);
         if (source) {
-            const video = document.createElement('VIDEO')
+            reader.readAsDataURL(source);
             video.src = URL.createObjectURL(source)
-            video.setAttribute('autoplay', '')
-            video.setAttribute('playsinline', '')
-            video.muted = 'muted'
-            video.play()
             video.onloadeddata = () => {
-                renderCanvasVideo(video)
+                playDiv.style.display = 'flex'
+                renderImageVideo(video)
             }
-            video.onended = () => clearInterval(i)
         }
     }
     //handle upload video
@@ -296,7 +330,7 @@ window.onload = () => {
         });
         var url = URL.createObjectURL(blob);
         // alert(url)
-        // console.log(url)
+        console.log(url)
         const stream = document.createElement('video')
         stream.src = url
         stream.muted = 'muted'
@@ -318,9 +352,9 @@ window.onload = () => {
     uploadFile.onclick = () => uploadAll.click()
     uploadAll.onchange = (value) => {
         const type = value.target.files[0].type.split('/')[0]
-        if(type === 'image'){
+        if (type === 'image') {
             handleUploadImage(value)
-        } else{
+        } else {
             handleUploadVideo(value)
         }
     }

@@ -212,7 +212,7 @@ h2,h4,p{
     color: #686868;
 }
 
-/* .modal-content-1::-webkit-scrollbar{
+.modal-content-1::-webkit-scrollbar{
     width: 6px;
 }
 .modal-content-1::-webkit-scrollbar-track{
@@ -222,7 +222,7 @@ h2,h4,p{
 .modal-content-1::-webkit-scrollbar-thumb{
     background: #fff;
     border-radius: 50px;
-} */
+}
 
 .modal .button-close{
     width: 55%;
@@ -230,13 +230,27 @@ h2,h4,p{
     position: relative;
     top: 0;
 }
-#myCanvas{
+#myCanvas, #playDiv{
     outline: 1px solid #d3d3d3;
     position: absolute;
     top:13%;
     left:9.75%;
     z-index: 1;
-    /* background-color: #fff; */
+    background-color: #fff;
+}
+#playDiv{
+    /* display: flex; */
+    display: none;
+    z-index: 2;
+    background: transparent;
+}
+#playButton{
+    margin: auto;
+    position: relative;
+    border: 2px solid;
+    border-radius: 50px;
+    background: #fff;
+    opacity: .5;
 }
 .poster-rotate{
     display: none;
@@ -252,7 +266,7 @@ h2,h4,p{
 }
 /* iphone 6,7,8 plus */
 @media only screen and (min-width: 414px){
-    #myCanvas{
+    #myCanvas, #playDiv{
         top:12%;
     }
 }
