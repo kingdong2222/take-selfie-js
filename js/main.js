@@ -263,6 +263,32 @@ window.onload = () => {
     }
     //handle add fram
 
+    function PNGSequence( canvas ){
+        this.canvas = canvas;
+        this.sequence = [];
+    };
+    PNGSequence.prototype.capture = function( fps ){
+        var cap = this;
+        this.sequence.length=0;
+        this.timer = setInterval(function(){
+            cap.sequence.push( cap.canvas.toDataURL() );
+        },1000/fps);
+    };
+    PNGSequence.prototype.stop = function(){
+        if (this.timer) clearInterval(this.timer);
+        delete this.timer;
+        return this.sequence;
+    };
+
+    // var recorder = new PNGSequence( myCanvas );
+    // recorder.capture(60);
+
+    // // Record 5 seconds
+    // setTimeout(function(){
+    // var thePNGDataURLs = recorder.stop();
+    // }, 5000 );
+    // console.log(recorder)
+
     const video = document.createElement('VIDEO')
     video.setAttribute('autoplay','')
     video.setAttribute('playsinline','')
@@ -274,6 +300,15 @@ window.onload = () => {
         playDiv.style.display = 'none'
         video.play()
         renderCanvasVideo(video)
+
+        var recorder = new PNGSequence( canvas );
+        recorder.capture(60);
+
+        // Record 5 seconds
+        setTimeout(function(){
+        var thePNGDataURLs = recorder.stop();
+        }, 5000 );
+        console.log(recorder)
     }
     video.onended = () => {
         clearInterval(i)
