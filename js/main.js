@@ -1,5 +1,5 @@
 window.onload = () => {
-    var type_of_file //check type of file upload or capture
+    let type_of_file //check type of file upload or capture
 
     //upload image
     const imageCamera = document.getElementById('image-camera')
