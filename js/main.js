@@ -230,10 +230,10 @@ window.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         // console.log(rwh, xOffset, yOffset, newWidth, newHeight)
         // streaming(image.duration)
-        // i = setInterval(() => {
+        i = setInterval(() => {
         ctx.drawImage(image, xOffset, yOffset, newWidth, newHeight);
         ctx.drawImage(frame, 0, 0, canvas.width, canvas.height)
-        // }, 20)
+        }, 20)
         ctx.save();
         ctx.restore()
     }
