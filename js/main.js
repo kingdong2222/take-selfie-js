@@ -217,6 +217,23 @@ window.onload = () => {
     }
     //handle rotate for mobile
 
+    function PNGSequence( canvas ){
+        this.canvas = canvas;
+        this.sequence = [];
+    };
+    PNGSequence.prototype.capture = function( fps ){
+        var cap = this;
+        this.sequence.length=0;
+        this.timer = setInterval(function(){
+            cap.sequence.push( cap.canvas.toDataURL() );
+        },1000/fps);
+    };
+    PNGSequence.prototype.stop = function(){
+        if (this.timer) clearInterval(this.timer);
+        delete this.timer;
+        return this.sequence;
+    };
+
     renderImageVideo = (image) => {
         const rwh = image.videoWidth / image.videoHeight
         let newWidth = canvas.width
@@ -230,10 +247,10 @@ window.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         // console.log(rwh, xOffset, yOffset, newWidth, newHeight)
         // streaming(image.duration)
-        i = setInterval(() => {
+        // i = setInterval(() => {
         ctx.drawImage(image, xOffset, yOffset, newWidth, newHeight);
         ctx.drawImage(frame, 0, 0, canvas.width, canvas.height)
-        }, 20)
+        // }, 20)
         ctx.save();
         ctx.restore()
     }
@@ -260,25 +277,18 @@ window.onload = () => {
         ctx.restore()
         // loader.style.display = 'none'
         // canvas.style.display = 'block'
+        var recorder = new PNGSequence( canvas );
+        recorder.capture(60);
+
+        // Record 5 seconds
+        setTimeout(function(){
+        var thePNGDataURLs = recorder.stop();
+        }, 5000 );
+        console.log(recorder)
     }
     //handle add fram
 
-    function PNGSequence( canvas ){
-        this.canvas = canvas;
-        this.sequence = [];
-    };
-    PNGSequence.prototype.capture = function( fps ){
-        var cap = this;
-        this.sequence.length=0;
-        this.timer = setInterval(function(){
-            cap.sequence.push( cap.canvas.toDataURL() );
-        },1000/fps);
-    };
-    PNGSequence.prototype.stop = function(){
-        if (this.timer) clearInterval(this.timer);
-        delete this.timer;
-        return this.sequence;
-    };
+    
 
     // var recorder = new PNGSequence( myCanvas );
     // recorder.capture(60);
@@ -301,14 +311,7 @@ window.onload = () => {
         video.play()
         renderCanvasVideo(video)
 
-        var recorder = new PNGSequence( canvas );
-        recorder.capture(60);
-
-        // Record 5 seconds
-        setTimeout(function(){
-        var thePNGDataURLs = recorder.stop();
-        }, 5000 );
-        console.log(recorder)
+        
     }
     video.onended = () => {
         clearInterval(i)
