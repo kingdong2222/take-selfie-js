@@ -488,7 +488,7 @@
 		<img class='like-blur' src='images/like.png' />
 		<img class='heart' src='images/heart.png' />
 		<div class='group-button'>
-			<div class='button download-file' id="download-file">
+			<div class='button download-file' id="myBtnModal">
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 88 59">
 					<defs>
 						<style>
@@ -799,6 +799,17 @@
 	<!-- Reference to your JavaScript file -->
 	<script>
 
+
+		const canvas = document.getElementById("myCanvas");
+		const ctx = canvas.getContext("2d");
+		var canvas1 = document.getElementById("rotate-canvas");
+		var ctx1 = canvas1.getContext("2d");
+		const frame = new Image()
+		frame.src = './images/photoframe.png'
+		
+		canvas.width = innerWidth * 0.71
+    	canvas.height = innerWidth * 0.71
+
 		//open popup
 		var modal = document.getElementById("myModal");
 
@@ -827,7 +838,7 @@
 		}
 
 		//download image
-		// document.getElementById('download-file').onclick= function(){
+		// document.getElementById('myBtnModal').onclick= function(){
 		// 	modal.style.display = "block";
 		// 	var image = convertCanvasToImage(document.getElementById("myCanvas"));
 		// 	download(image.src, 'image-redoxon', 'png');
@@ -844,7 +855,7 @@
 				video_preview.src = reader.result;
 
 				//download video
-				document.getElementById('download-file').onclick = function () {
+				document.getElementById('myBtnModal').onclick = function () {
 					modal.style.display = "block";
 					download(video_preview.src, 'video-redoxon', 'mp4');
 				}
@@ -857,7 +868,7 @@
 
 		}
 
-		document.getElementById('download-file').onclick = function () {
+		document.getElementById('myBtnModal').onclick = function () {
 			modal.style.display = "block";
 			var image = convertCanvasToImage(document.getElementById("myCanvas"));
 			alert(type_of_file)

@@ -1,13 +1,12 @@
 window.onload = () => {
-    const type_of_file //check type of file upload or capture
+    var type_of_file //check type of file upload or capture
 
     //upload image
     const imageCamera = document.getElementById('image-camera')
     const uploadImage = document.getElementById('upload-image')
-    imageCamera.onclick = () => {
-        uploadImage.click()
-        type_of_file = 'image'
-    }
+    imageCamera.onclick = () => uploadImage.click()
+    type_of_file = 'image'
+    
 
     const canvas = document.getElementById("myCanvas");
     const ctx = canvas.getContext("2d");
@@ -136,10 +135,9 @@ window.onload = () => {
     //video
     const videoCamera = document.getElementById('video-camera')
     const uploadVideo = document.getElementById('upload-video')
-    videoCamera.onclick = () => {
-        uploadVideo.click()
-        type_of_file = 'video'
-    }
+    videoCamera.onclick = () => uploadVideo.click()
+    type_of_file = 'video'
+    
 
     //handle rotate for mobile
     drawRotatedVideo = (degrees, image) => {
