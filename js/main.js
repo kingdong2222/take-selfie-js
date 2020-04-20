@@ -277,14 +277,6 @@ window.onload = () => {
         ctx.restore()
         // loader.style.display = 'none'
         // canvas.style.display = 'block'
-        var recorder = new PNGSequence( canvas );
-        recorder.capture(60);
-
-        // Record 5 seconds
-        setTimeout(function(){
-        var thePNGDataURLs = recorder.stop();
-        }, 5000 );
-        console.log(recorder)
     }
     //handle add fram
 
