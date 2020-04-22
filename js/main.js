@@ -12,19 +12,10 @@ window.onload = () => {
     const ctx = canvas.getContext("2d");
     var canvas1 = document.getElementById("rotate-canvas");
     var ctx1 = canvas1.getContext("2d");
-
-    const canvas_hd = document.getElementById("myCanvasHD");
-    const ctx_hd = canvas.getContext("2d");
-    var canvas1_hd = document.getElementById("rotate-canvasHD");
-    var ctx1_hd = canvas1.getContext("2d");
-
     const frame = new Image()
     frame.src = './images/photoframe.png'
 
     var i;
-
-    canvas_hd.width = innerWidth
-    canvas_hd.height = innerWidth
 
     canvas.width = innerWidth * 0.71
     canvas.height = innerWidth * 0.71
@@ -60,14 +51,6 @@ window.onload = () => {
         ctx.restore()
         // loader.style.display = 'none'
         // canvas.style.display = 'block'
-
-        const xOffset_hd = rwh > 1 ? ((canvas_hd.width - newWidth) / 2) : 0;
-        const yOffset_hd = rwh <= 1 ? ((canvas_hd.height - newHeight) / 2) : 0;
-        ctx_hd.clearRect(0, 0, canvas_hd.width, canvas_hd.height);
-        ctx_hd.save();
-        ctx_hd.drawImage(image, xOffset_hd, yOffset_hd, newWidth, newHeight);
-        ctx_hd.drawImage(frame, 0, 0, canvas_hd.width, canvas_hd.height)
-        ctx_hd.restore()
     }
     //render canvas
 
@@ -111,19 +94,6 @@ window.onload = () => {
         const tempImage = new Image()
         tempImage.src = data
         tempImage.onload = () => renderCanvas(tempImage)
-
-        canvas1_hd.width = tempW
-        canvas1_hd.height = tempH
-        ctx1_hd.clearRect(0, 0, canvas1_hd.width, canvas1_hd.height);
-        ctx1_hd.save();
-        ctx1_hd.translate(canvas1_hd.width, canvas1_hd.height);
-        ctx1_hd.rotate(degrees * Math.PI / 180);
-        ctx1_hd.drawImage(image, tempImageW, tempImageH);
-        ctx1_hd.restore();
-        var data = canvas1_hd.toDataURL("image/jpg",1);
-        const tempImage_hd = new Image()
-        tempImage_hd.src = data
-        tempImage_hd.onload = () => renderCanvas(tempImage_hd)
     }
     //rotate image for mobile
 

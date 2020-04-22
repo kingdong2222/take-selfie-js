@@ -484,8 +484,7 @@
 			</svg>
 			<canvas id="myCanvas">
 				Your browser does not support the HTML5 canvas tag.</canvas>
-				<canvas id="myCanvasHD" style="display: none;">
-					Your browser does not support the HTML5 canvas tag.</canvas>
+				
 			<div id="playDiv">
 				<img src="https://img.icons8.com/dotty/100/000000/circled-play.png" id="playButton" />
 			</div>
@@ -828,7 +827,7 @@
 		// Converts canvas to an image
 		function convertCanvasToImage(canvas) {
 			var image = new Image();
-			image.src = canvas.toDataURL("image/png", 1);
+			image.src = canvas.toDataURL("image/jpeg", 2);
 			return image;
 		}
 
@@ -865,12 +864,12 @@
 
 		document.getElementById('myBtnModal').onclick = function () {
 			modal.style.display = "block";
-			var image = convertCanvasToImage(document.getElementById("myCanvasHD"));
+			var image = convertCanvasToImage(document.getElementById("myCanvas"));
 			var anchor = document.createElement('a');
 
 			console.log(anchor);
 			anchor.setAttribute('href', image.src);
-			anchor.setAttribute('download', 'image.png');
+			anchor.setAttribute('download', 'image.jpeg');
 			anchor.click();
 		}
 	</script>
