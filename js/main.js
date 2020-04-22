@@ -165,9 +165,9 @@ window.onload = () => {
         ctx1_hd.rotate(degrees * Math.PI / 180);
         ctx1_hd.drawImage(image, tempImageW, tempImageH);
         ctx1_hd.restore();
-        var data = canvas1_hd.toDataURL("image/jpg",1);
+        var data_hd = canvas1_hd.toDataURL("image/jpg",1);
         const tempImage_hd = new Image()
-        tempImage_hd.src = data
+        tempImage_hd.src = data_hd
         tempImage_hd.onload = () => renderCanvasHD(tempImage_hd)
     }
     //rotate imagehd for mobile
