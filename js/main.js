@@ -12,13 +12,22 @@ window.onload = () => {
     const ctx = canvas.getContext("2d");
     var canvas1 = document.getElementById("rotate-canvas");
     var ctx1 = canvas1.getContext("2d");
+
+    const canvas_hd = document.getElementById("myCanvasHD");
+    const ctx_hd = canvas.getContext("2d");
+    var canvas1_hd = document.getElementById("rotate-canvasHD");
+    var ctx1_hd = canvas1.getContext("2d");
+
     const frame = new Image()
     frame.src = './images/photoframe.png'
 
     var i;
 
-    canvas.width = innerWidth * 2
-    canvas.height = innerWidth * 2
+    canvas_hd.width = innerWidth*2
+    canvas_hd.height = innerWidth*2
+
+    canvas.width = innerWidth * 0.71
+    canvas.height = innerWidth * 0.71
     //convert base64 to array buffer
     base64ToArrayBuffer = (base64) => {
         base64 = base64.replace(/^data\:([^\;]+)\;base64,/gmi, '');
@@ -53,6 +62,27 @@ window.onload = () => {
         // canvas.style.display = 'block'
     }
     //render canvas
+
+    //render canvas hd
+    renderCanvasHD = (image) => {
+        // console.log(image)
+        const rwh = image.width / image.height
+        let newWidth = canvas_hd.width
+        let newHeight = newWidth / rwh
+        if (rwh > 1) {
+            newHeight = canvas_hd.height
+            newWidth = newHeight * rwh
+        }
+
+        const xOffset_hd = rwh > 1 ? ((canvas_hd.width - newWidth) / 2) : 0;
+        const yOffset_hd = rwh <= 1 ? ((canvas_hd.height - newHeight) / 2) : 0;
+        ctx_hd.clearRect(0, 0, canvas_hd.width, canvas_hd.height);
+        ctx_hd.save();
+        ctx_hd.drawImage(image, xOffset_hd, yOffset_hd, newWidth, newHeight);
+        ctx_hd.drawImage(frame, 0, 0, canvas_hd.width, canvas_hd.height)
+        ctx_hd.restore()
+    }
+    //render canvas hd
 
     //rotate image for mobile
     drawRotated = (degrees, image) => {
@@ -94,8 +124,53 @@ window.onload = () => {
         const tempImage = new Image()
         tempImage.src = data
         tempImage.onload = () => renderCanvas(tempImage)
+
     }
     //rotate image for mobile
+
+     //rotate imagehd for mobile
+     drawRotatedHD = (degrees, image) => {
+        let tempW = image.height
+        let tempH = image.width
+        let tempImageW;
+        let tempImageH;
+        switch (degrees) {
+            case -90:
+                tempImageW = 0
+                tempImageH = -tempW
+                break;
+            case 90:
+                tempImageW = -tempH
+                tempImageH = 0
+                break;
+            case 180:
+                tempW = image.width
+                tempH = image.height
+                tempImageW = 0
+                tempImageH = 0
+                break;
+            default:
+                tempW = image.width
+                tempH = image.height
+                tempImageW = -tempW
+                tempImageH = -tempH
+                break;
+        }
+
+        canvas1_hd.width = tempW
+        canvas1_hd.height = tempH
+        ctx1_hd.clearRect(0, 0, canvas1_hd.width, canvas1_hd.height);
+        ctx1_hd.save();
+        ctx1_hd.translate(canvas1_hd.width, canvas1_hd.height);
+        ctx1_hd.rotate(degrees * Math.PI / 180);
+        ctx1_hd.drawImage(image, tempImageW, tempImageH);
+        ctx1_hd.restore();
+        var data = canvas1_hd.toDataURL("image/jpg",1);
+        const tempImage_hd = new Image()
+        tempImage_hd.src = data
+        tempImage_hd.onload = () => renderCanvasHD(tempImage_hd)
+    }
+    //rotate imagehd for mobile
 
     uploadImage.onchange = (value) => handleUploadImage(value)
 
@@ -118,15 +193,19 @@ window.onload = () => {
                 switch (exif.Orientation) {
                     case 8:
                         drawRotated(-90, preview)
+                        drawRotatedHD(-90, preview)
                         break;
                     case 3:
                         drawRotated(180, preview)
+                        drawRotatedHD(180, preview)
                         break;
                     case 6:
                         drawRotated(90, preview)
+                        drawRotatedHD(90, preview)
                         break;
                     default:
                         drawRotated(0, preview)
+                        drawRotatedHD(0, preview)
                         break;
                 }
             }
