@@ -172,7 +172,10 @@ window.onload = () => {
     }
     //rotate imagehd for mobile
 
-    uploadImage.onchange = (value) => handleUploadImage(value)
+    uploadImage.onchange = (value) => {
+        handleUploadImage(value)
+        handleUploadImageHD(value)
+    }
 
     handleUploadImage = (e) => {
         clearInterval(i)
@@ -193,25 +196,64 @@ window.onload = () => {
                 switch (exif.Orientation) {
                     case 8:
                         drawRotated(-90, preview)
-                        drawRotatedHD(-90, preview)
+                        // drawRotatedHD(-90, preview)
                         break;
                     case 3:
                         drawRotated(180, preview)
-                        drawRotatedHD(180, preview)
+                        // drawRotatedHD(180, preview)
                         break;
                     case 6:
                         drawRotated(90, preview)
-                        drawRotatedHD(90, preview)
+                        // drawRotatedHD(90, preview)
                         break;
                     default:
                         drawRotated(0, preview)
-                        drawRotatedHD(0, preview)
+                        // drawRotatedHD(0, preview)
                         break;
                 }
             }
         }
     }
     //upload image
+
+    handleUploadImageHD = (e) => {
+        clearInterval(i)
+        video.src = ''
+        playDiv.style.display = 'none'
+        const source = e.target.files[0]
+        const reader = new FileReader();
+        // console.log(source)
+        reader.readAsDataURL(source);
+        // loader.style.display = 'block'
+        // canvas.style.display = 'none'
+        reader.onloadend = () => {
+            const preview = new Image();
+            preview.src = reader.result
+            preview.onload = () => {
+                const exif = EXIF.readFromBinaryFile(base64ToArrayBuffer(reader.result));
+                // document.getElementById('concat').innerText = exif.Orientation
+                switch (exif.Orientation) {
+                    case 8:
+                        // drawRotated(-90, preview)
+                        drawRotatedHD(-90, preview)
+                        break;
+                    case 3:
+                        // drawRotated(180, preview)
+                        drawRotatedHD(180, preview)
+                        break;
+                    case 6:
+                        // drawRotated(90, preview)
+                        drawRotatedHD(90, preview)
+                        break;
+                    default:
+                        // drawRotated(0, preview)
+                        drawRotatedHD(0, preview)
+                        break;
+                }
+            }
+        }
+    }
+    //upload image HD
 
     //video
     const videoCamera = document.getElementById('video-camera')
