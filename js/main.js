@@ -17,8 +17,8 @@ window.onload = () => {
 
     var i;
 
-    canvas.width = innerWidth * 0.71
-    canvas.height = innerWidth * 0.71
+    canvas.width = innerWidth * 2
+    canvas.height = innerWidth * 2
     //convert base64 to array buffer
     base64ToArrayBuffer = (base64) => {
         base64 = base64.replace(/^data\:([^\;]+)\;base64,/gmi, '');
