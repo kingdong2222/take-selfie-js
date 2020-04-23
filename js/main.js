@@ -20,6 +20,9 @@ window.onload = () => {
         }
     }
 
+    
+    const loading_icon_orange = document.getElementById('svg-loading-orange')
+
     const playDiv = document.getElementById('playDiv')
     playDiv.style.width = innerWidth * 0.71
     playDiv.style.height = innerWidth * 0.71
@@ -35,9 +38,9 @@ window.onload = () => {
     var ctx1 = canvas1.getContext("2d");
 
     const canvas_hd = document.getElementById("myCanvasHD");
-    const ctx_hd = canvas.getContext("2d");
+    const ctx_hd = canvas_hd.getContext("2d");
     var canvas1_hd = document.getElementById("rotate-canvasHD");
-    var ctx1_hd = canvas1.getContext("2d");
+    var ctx1_hd = canvas1_hd.getContext("2d");
 
     imageCamera.onclick = () => {
         uploadImage.click()
@@ -88,6 +91,7 @@ window.onload = () => {
         ctx.drawImage(image, xOffset, yOffset, newWidth, newHeight);
         ctx.drawImage(frame, 0, 0, canvas.width, canvas.height)
         ctx.restore()
+        loading_icon_orange.style.display = 'none'
         // loader.style.display = 'none'
         // canvas.style.display = 'block'
     }
@@ -218,6 +222,7 @@ window.onload = () => {
         // loader.style.display = 'block'
         // canvas.style.display = 'none'
         reader.onloadend = () => {
+            loading_icon_orange.style.display = 'unset'
             const preview = new Image();
             preview.src = reader.result
             preview.onload = () => {
@@ -588,6 +593,7 @@ const unsignedUploadPreset = 'redoxon-new';
 
 // *********** Upload file to Cloudinary ******************** //
 function uploadFileVideo(file) {
+    var loading_icon_white = document.getElementById('svg-loading-white')
     var url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
     var xhr = new XMLHttpRequest();
     var fd = new FormData();
@@ -599,6 +605,7 @@ function uploadFileVideo(file) {
 
     // Update progress (can be used to show progress indicator)
     xhr.upload.addEventListener("progress", function (e) {
+        loading_icon_white.style.display = 'unset'
         var progress = Math.round((e.loaded * 100.0) / e.total);
         // document.getElementById('progress').style.width = progress + "%";
 
@@ -608,14 +615,12 @@ function uploadFileVideo(file) {
 
     xhr.onreadystatechange = function (e) {
         if (xhr.readyState == 4 && xhr.status == 200) {
+            loading_icon_white.style.display = 'none'
             let video_preview = document.getElementById("myVideo");
             // File uploaded successfully
             var response = JSON.parse(xhr.responseText);
             // https://res.cloudinary.com/cloudName/image/upload/v1483481128/public_id.jpg
             var url = response.secure_url;
-
-            var downloadButton = document.getElementById('fileDownload');
-            //   downloadButton.href = url;
             //   alert(response.url);
             console.log(response)
             video_preview.src = url

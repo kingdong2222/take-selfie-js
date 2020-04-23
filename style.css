@@ -263,6 +263,12 @@ h2,h4,p{
     top: 13%;
     left: 9.75%;
 }
+#svg-loading-white,#svg-loading-orange{
+    display: none;
+    position: absolute; 
+    top: 24%;
+    left: 22%;
+}
 /* iphone 5 */
 @media only screen and (max-width: 320px){
     .modal .button-close{
@@ -290,6 +296,10 @@ h2,h4,p{
     #myVideo{
         top: 10%;
         height: 72%;
+    }
+    #svg-loading-white,#svg-loading-orange{
+        top: 35%;
+        left: 35%;
     }
 }
 /* desktop */
