@@ -209,8 +209,8 @@ window.onload = () => {
 
     handleUploadImage = (e) => {
         clearInterval(i)
-        video.src = ''
-        playDiv.style.display = 'none'
+        // video.src = ''
+        // playDiv.style.display = 'none'
         const source = e.target.files[0]
         const reader = new FileReader();
         // console.log(source)
@@ -248,8 +248,8 @@ window.onload = () => {
 
     handleUploadImageHD = (e) => {
         clearInterval(i)
-        video.src = ''
-        playDiv.style.display = 'none'
+        // video.src = ''
+        // playDiv.style.display = 'none'
         const source = e.target.files[0]
         const reader = new FileReader();
         // console.log(source)
@@ -312,7 +312,7 @@ window.onload = () => {
     //video
     const videoCamera = document.getElementById('video-camera')
     const uploadVideo = document.getElementById('upload-video')
-    videoCamera.onclick = () => uploadVideo.click()
+    // videoCamera.onclick = () => uploadVideo.click()
 
     const cloudName = 'djkc67zly';
 
@@ -327,32 +327,32 @@ window.onload = () => {
     e.preventDefault(); // prevent navigation to "#"
     }, false);
 
-    // dropbox = document.getElementById("dropbox");
-    // dropbox.addEventListener("dragenter", dragenter, false);
-    // dropbox.addEventListener("dragover", dragover, false);
-    // dropbox.addEventListener("drop", drop, false);
+    dropbox = document.getElementById("myVideo");
+    dropbox.addEventListener("dragenter", dragenter, false);
+    dropbox.addEventListener("dragover", dragover, false);
+    dropbox.addEventListener("drop", drop, false);
 
     // ************************ Drag and drop ***************** //
-    // function dragenter(e) {
-    //     e.stopPropagation();
-    //     e.preventDefault();
-    // }
+    function dragenter(e) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
 
-    // function dragover(e) {
-    //     e.stopPropagation();
-    //     e.preventDefault();
-    // }
+    function dragover(e) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
 
 
-    // function drop(e) {
-    //     e.stopPropagation();
-    //     e.preventDefault();
+    function drop(e) {
+        e.stopPropagation();
+        e.preventDefault();
 
-    //     var dt = e.dataTransfer;
-    //     var files = dt.files;
+        var dt = e.dataTransfer;
+        var files = dt.files;
 
-    //     handleFiles(files);
-    // }
+        handleFiles(files);
+    }
 
     // *********** Upload file to Cloudinary ******************** //
     function uploadFileVideo(file) {
@@ -381,8 +381,8 @@ window.onload = () => {
         // https://res.cloudinary.com/cloudName/image/upload/v1483481128/public_id.jpg
         var url = response.secure_url;
 
-        var downloadButton = document.getElementById('fileDownload');
-        downloadButton.href = url;
+        // var downloadButton = document.getElementById('fileDownload');
+        // downloadButton.href = url;
         alert(response.url);
         video_preview.src = url
         //TODO:  add video rendering here(download file)
