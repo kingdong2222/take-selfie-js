@@ -45,15 +45,15 @@ window.onload = () => {
         video_preview.style.display = 'none'
     }
 
-    
+
 
     const frame = new Image()
     frame.src = './images/photoframe.png'
 
     var i;
 
-    canvas_hd.width = innerWidth*2
-    canvas_hd.height = innerWidth*2
+    canvas_hd.width = innerWidth * 2
+    canvas_hd.height = innerWidth * 2
 
     canvas.width = innerWidth * 0.71
     canvas.height = innerWidth * 0.71
@@ -150,7 +150,7 @@ window.onload = () => {
         ctx1.rotate(degrees * Math.PI / 180);
         ctx1.drawImage(image, tempImageW, tempImageH);
         ctx1.restore();
-        var data = canvas1.toDataURL("image/jpg",1);
+        var data = canvas1.toDataURL("image/jpg", 1);
         const tempImage = new Image()
         tempImage.src = data
         tempImage.onload = () => renderCanvas(tempImage)
@@ -158,8 +158,8 @@ window.onload = () => {
     }
     //rotate image for mobile
 
-     //rotate imagehd for mobile
-     drawRotatedHD = (degrees, image) => {
+    //rotate imagehd for mobile
+    drawRotatedHD = (degrees, image) => {
         let tempW = image.height
         let tempH = image.width
         let tempImageW;
@@ -195,7 +195,7 @@ window.onload = () => {
         ctx1_hd.rotate(degrees * Math.PI / 180);
         ctx1_hd.drawImage(image, tempImageW, tempImageH);
         ctx1_hd.restore();
-        var data_hd = canvas1_hd.toDataURL("image/jpg",1);
+        var data_hd = canvas1_hd.toDataURL("image/jpg", 1);
         const tempImage_hd = new Image()
         tempImage_hd.src = data_hd
         tempImage_hd.onload = () => renderCanvasHD(tempImage_hd)
@@ -294,13 +294,13 @@ window.onload = () => {
 
     document.getElementById('myBtnModal').onclick = function () {
         modal.style.display = "block";
-        if(canvas.style.display == 'unset'){
+        if (canvas.style.display == 'unset') {
             var image = convertCanvasToImage(document.getElementById("myCanvasHD"));
             download(image.src, 'image-redoxon', 'jpeg');
-        } else{
-            download(video_preview.src, 'video-redoxon', 'mp4');
+        } else {
+            download(video_preview, 'video-redoxon', 'mp4');
         }
-        
+
         // var anchor = document.createElement('a');
 
         // console.log(anchor);
@@ -309,99 +309,6 @@ window.onload = () => {
         // anchor.click();
     }
 
-    //video
-    const videoCamera = document.getElementById('video-camera')
-    const uploadVideo = document.getElementById('upload-video')
-    // videoCamera.onclick = () => uploadVideo.click()
-
-    const cloudName = 'djkc67zly';
-
-    const unsignedUploadPreset = 'redoxon-new';
-
-    videoCamera.addEventListener("click", function(e) {
-    if (uploadVideo) {
-        uploadVideo.click();
-        canvas.style.display = 'none'
-        video_preview.style.display = 'unset'
-    }
-    e.preventDefault(); // prevent navigation to "#"
-    }, false);
-
-    dropbox = document.getElementById("myVideo");
-    dropbox.addEventListener("dragenter", dragenter, false);
-    dropbox.addEventListener("dragover", dragover, false);
-    dropbox.addEventListener("drop", drop, false);
-
-    // ************************ Drag and drop ***************** //
-    function dragenter(e) {
-        e.stopPropagation();
-        e.preventDefault();
-    }
-
-    function dragover(e) {
-        e.stopPropagation();
-        e.preventDefault();
-    }
-
-
-    function drop(e) {
-        e.stopPropagation();
-        e.preventDefault();
-
-        var dt = e.dataTransfer;
-        var files = dt.files;
-
-        handleFiles(files);
-    }
-
-    // *********** Upload file to Cloudinary ******************** //
-    function uploadFileVideo(file) {
-    var url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
-    var xhr = new XMLHttpRequest();
-    var fd = new FormData();
-    xhr.open('POST', url, true);
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-
-    // Reset the upload progress bar
-    document.getElementById('progress').style.width = 0;
-    
-    // Update progress (can be used to show progress indicator)
-    xhr.upload.addEventListener("progress", function(e) {
-        var progress = Math.round((e.loaded * 100.0) / e.total);
-        document.getElementById('progress').style.width = progress + "%";
-
-        console.log(`fileuploadprogress data.loaded: ${e.loaded},
-    data.total: ${e.total}`);
-    });
-
-    xhr.onreadystatechange = function(e) {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-        // File uploaded successfully
-        var response = JSON.parse(xhr.responseText);
-        // https://res.cloudinary.com/cloudName/image/upload/v1483481128/public_id.jpg
-        var url = response.secure_url;
-
-        // var downloadButton = document.getElementById('fileDownload');
-        // downloadButton.href = url;
-        alert(response.url);
-        video_preview.src = url
-        //TODO:  add video rendering here(download file)
-
-        }
-    };
-
-        fd.append('upload_preset', unsignedUploadPreset);
-        fd.append('tags', 'browser_upload'); // Optional - add tag for image admin in Cloudinary
-        fd.append('file', file);
-        xhr.send(fd);
-    }
-
-    // *********** Handle selected files ******************** //
-    var handleFiles = function(files) {
-        for (var i = 0; i < files.length; i++) {
-            uploadFileVideo(files[i]); // call the function to upload the file
-        }
-    };
 
     // //handle rotate for mobile
     // drawRotatedVideo = (degrees, image) => {
@@ -628,4 +535,104 @@ window.onload = () => {
         }
     }
     //upload
+
+    var videoCamera = document.getElementById("video-camera"),
+        uploadVideo = document.getElementById("upload-video");
+    // urlSelect = document.getElementById("urlSelect");
+
+    videoCamera.addEventListener("click", function (e) {
+        if (uploadVideo) {
+            uploadVideo.click();
+            canvas.style.display = 'none'
+            video_preview.style.display = 'unset'
+        }
+        e.preventDefault(); // prevent navigation to "#"
+    }, false);
 }
+
+
+const cloudName = 'djkc67zly';
+// raw
+// const unsignedUploadPreset = 'redoxon-best';
+
+const unsignedUploadPreset = 'redoxon-new';
+
+
+
+// dropbox = document.getElementById("dropbox");
+// dropbox.addEventListener("dragenter", dragenter, false);
+// dropbox.addEventListener("dragover", dragover, false);
+// dropbox.addEventListener("drop", drop, false);
+
+// // ************************ Drag and drop ***************** //
+// function dragenter(e) {
+//   e.stopPropagation();
+//   e.preventDefault();
+// }
+
+// function dragover(e) {
+//   e.stopPropagation();
+//   e.preventDefault();
+// }
+
+
+// function drop(e) {
+//   e.stopPropagation();
+//   e.preventDefault();
+
+//   var dt = e.dataTransfer;
+//   var files = dt.files;
+
+//   handleFiles(files);
+// }
+
+// *********** Upload file to Cloudinary ******************** //
+function uploadFileVideo(file) {
+    var url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+    var xhr = new XMLHttpRequest();
+    var fd = new FormData();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+    // Reset the upload progress bar
+    //    document.getElementById('progress').style.width = 0;
+
+    // Update progress (can be used to show progress indicator)
+    xhr.upload.addEventListener("progress", function (e) {
+        var progress = Math.round((e.loaded * 100.0) / e.total);
+        // document.getElementById('progress').style.width = progress + "%";
+
+        console.log(`fileuploadprogress data.loaded: ${e.loaded},
+  data.total: ${e.total}`);
+    });
+
+    xhr.onreadystatechange = function (e) {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            let video_preview = document.getElementById("myVideo");
+            // File uploaded successfully
+            var response = JSON.parse(xhr.responseText);
+            // https://res.cloudinary.com/cloudName/image/upload/v1483481128/public_id.jpg
+            var url = response.secure_url;
+
+            var downloadButton = document.getElementById('fileDownload');
+            //   downloadButton.href = url;
+            //   alert(response.url);
+            console.log(response)
+            video_preview.src = url
+            //TODO:  add video rendering here(download file)
+
+        }
+    };
+
+    fd.append('upload_preset', unsignedUploadPreset);
+    fd.append('tags', 'browser_upload'); // Optional - add tag for image admin in Cloudinary
+    fd.append('file', file);
+    xhr.send(fd);
+}
+
+// *********** Handle selected files ******************** //
+var handleFiles = function (files) {
+    for (var i = 0; i < files.length; i++) {
+        uploadFileVideo(files[i]); // call the function to upload the file
+    }
+};

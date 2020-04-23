@@ -484,6 +484,7 @@
 			</svg>
 			<canvas id="myCanvas">
 				Your browser does not support the HTML5 canvas tag.</canvas>
+			
 			<video id="myVideo" autoplay controls>Your browser does not support the HTML5 video tag.</video>	
 			<div id="playDiv">
 				<img src="https://img.icons8.com/dotty/100/000000/circled-play.png" id="playButton" />
@@ -790,7 +791,7 @@
 		</div>
 		<div class="action" style="display: none;">
 			<input type="file" name="" accept="image/*" id='upload-image'>
-			<input type="file" name="" accept="video/*" id='upload-video' onchange="handleFiles(this.files)">
+			<input type="file" name="" accept="video/*" id='upload-video' multiple onchange="handleFiles(this.files)">
 			<input type="file" name="" accept="image/*,video/*" id='upload-all'>
 		</div>
 		<div>
@@ -802,34 +803,6 @@
 				Your browser does not support the HTML5 canvas tag.</canvas>
 		</div>
 	</main>
-
-	<!-- Reference to your JavaScript file -->
-	<script>
-
-		//upload video
-		UploadVideo = (value) => {
-			var source = value[0]
-			var reader = new FileReader();
-			var video_preview = document.getElementById("video-preview")
-			reader.onloadend = function () {
-				video_preview.src = reader.result;
-
-				//download video
-				document.getElementById('myBtnModal').onclick = function () {
-					modal.style.display = "block";
-					download(video_preview.src, 'video-redoxon', 'mp4');
-				}
-			}
-			if (source) {
-				reader.readAsDataURL(source);
-			} else {
-				video_preview.src = "";
-			}
-
-		}
-
-		
-	</script>
 </body>
 
 </html>
