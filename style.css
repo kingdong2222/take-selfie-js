@@ -231,12 +231,12 @@ h2,h4,p{
     top: 0;
 }
 #myCanvas, #playDiv{
-    outline: 1px solid #d3d3d3;
     position: absolute;
     top:13%;
     left:9.75%;
     z-index: 1;
     background-color: #fff;
+    /* display: none; */
 }
 #playDiv{
     /* display: flex; */
@@ -254,6 +254,14 @@ h2,h4,p{
 }
 .poster-rotate{
     display: none;
+}
+#myVideo{
+    display: none;
+    width: 71vw;
+    height: 70%;
+    position: absolute;
+    top: 13%;
+    left: 9.75%;
 }
 /* iphone 5 */
 @media only screen and (max-width: 320px){
@@ -278,6 +286,10 @@ h2,h4,p{
     #myCanvas{
         top: 11%;
         left: 10.25%
+    }
+    #myVideo{
+        top: 10%;
+        height: 72%;
     }
 }
 /* desktop */

@@ -1,4 +1,25 @@
 window.onload = () => {
+
+    //open popup
+    var modal = document.getElementById("myModal");
+
+    var btn = document.getElementById("myBtnModal");
+
+    var span = document.getElementsByClassName("close")[0];
+
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
     const playDiv = document.getElementById('playDiv')
     playDiv.style.width = innerWidth * 0.71
     playDiv.style.height = innerWidth * 0.71
@@ -6,8 +27,8 @@ window.onload = () => {
     //upload image
     const imageCamera = document.getElementById('image-camera')
     const uploadImage = document.getElementById('upload-image')
-    imageCamera.onclick = () => uploadImage.click()
 
+    const video_preview = document.getElementById("myVideo");
     const canvas = document.getElementById("myCanvas");
     const ctx = canvas.getContext("2d");
     var canvas1 = document.getElementById("rotate-canvas");
@@ -17,6 +38,14 @@ window.onload = () => {
     const ctx_hd = canvas.getContext("2d");
     var canvas1_hd = document.getElementById("rotate-canvasHD");
     var ctx1_hd = canvas1.getContext("2d");
+
+    imageCamera.onclick = () => {
+        uploadImage.click()
+        canvas.style.display = 'unset'
+        video_preview.style.display = 'none'
+    }
+
+    
 
     const frame = new Image()
     frame.src = './images/photoframe.png'
@@ -28,6 +57,7 @@ window.onload = () => {
 
     canvas.width = innerWidth * 0.71
     canvas.height = innerWidth * 0.71
+
     //convert base64 to array buffer
     base64ToArrayBuffer = (base64) => {
         base64 = base64.replace(/^data\:([^\;]+)\;base64,/gmi, '');
@@ -255,217 +285,330 @@ window.onload = () => {
     }
     //upload image HD
 
+    //download image HD
+    function convertCanvasToImage(canvas) {
+        var image = new Image();
+        image.src = canvas.toDataURL("image/jpeg", 1);
+        return image;
+    }
+
+    document.getElementById('myBtnModal').onclick = function () {
+        modal.style.display = "block";
+        if(canvas.style.display == 'unset'){
+            var image = convertCanvasToImage(document.getElementById("myCanvasHD"));
+            download(image.src, 'image-redoxon', 'jpeg');
+        } else{
+            download(video_preview.src, 'video-redoxon', 'mp4');
+        }
+        
+        // var anchor = document.createElement('a');
+
+        // console.log(anchor);
+        // anchor.setAttribute('href', image.src);
+        // anchor.setAttribute('download', 'image.jpeg');
+        // anchor.click();
+    }
+
     //video
     const videoCamera = document.getElementById('video-camera')
     const uploadVideo = document.getElementById('upload-video')
     videoCamera.onclick = () => uploadVideo.click()
 
-    //handle rotate for mobile
-    drawRotatedVideo = (degrees, image) => {
-        // alert(image.duration)
-        // console.log('drawRotatedVideo')
-        const tempCanvas = document.createElement('CANVAS')
-        const tempctx = tempCanvas.getContext("2d");
-        document.body.appendChild(tempCanvas)
+    const cloudName = 'djkc67zly';
 
-        //recorder
-        // const chunks = []
-        // recorder = new MediaRecorder(tempctx.canvas.captureStream(30));
-        // recorder.ondataavailable = (e) => {
-        // 	if (e.data.size > 0) {
-        // 		chunks.push(e.data);
-        // 	}
-        // };
-        // recorder.onstop = () => {
-        // 	const blob = new Blob(chunks, { type: 'video/mp4' });
-        // 	const url = window.URL.createObjectURL(blob);
-        // 	alert(url)
-        // 	const rotatedVideo = document.createElement('VIDEO')
-        // 	rotatedVideo.src = url
-        // 	rotatedVideo.setAttribute('muted', '')
-        // 	rotatedVideo.play()
-        // 	rotatedVideo.onloadeddata = () => {
-        // 		console.log('onstop')
-        // 		renderCanvasVideo(rotatedVideo)
-        // 	}
-        // };
-        // recorder.start()
-        // setTimeout(() => {
-        // 	recorder.stop()
-        // }, image.duration * 1000);
-        //recorder
+    const unsignedUploadPreset = 'redoxon-new';
 
-        streaming(tempCanvas, image.duration)
+    videoCamera.addEventListener("click", function(e) {
+    if (uploadVideo) {
+        uploadVideo.click();
+        canvas.style.display = 'none'
+        video_preview.style.display = 'unset'
+    }
+    e.preventDefault(); // prevent navigation to "#"
+    }, false);
 
-        tempCanvas.height = 300
-        tempCanvas.width = 300
-        let tempW = image.videoHeight
-        let tempH = image.videoWidth
-        let tempImageW;
-        let tempImageH;
-        switch (degrees) {
-            case -90:
-                tempImageW = 0
-                tempImageH = -tempW
-                break;
-            case 90:
-                tempImageW = -tempH
-                tempImageH = 0
-                break;
-            case 180:
-                tempW = image.videoWidth
-                tempH = image.videoHeight
-                tempImageW = 0
-                tempImageH = 0
-                break;
-            default:
-                tempW = image.videoWidth
-                tempH = image.videoHeight
-                tempImageW = -tempW
-                tempImageH = -tempH
-                break;
+    // dropbox = document.getElementById("dropbox");
+    // dropbox.addEventListener("dragenter", dragenter, false);
+    // dropbox.addEventListener("dragover", dragover, false);
+    // dropbox.addEventListener("drop", drop, false);
+
+    // ************************ Drag and drop ***************** //
+    // function dragenter(e) {
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    // }
+
+    // function dragover(e) {
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    // }
+
+
+    // function drop(e) {
+    //     e.stopPropagation();
+    //     e.preventDefault();
+
+    //     var dt = e.dataTransfer;
+    //     var files = dt.files;
+
+    //     handleFiles(files);
+    // }
+
+    // *********** Upload file to Cloudinary ******************** //
+    function uploadFileVideo(file) {
+    var url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+    var xhr = new XMLHttpRequest();
+    var fd = new FormData();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+    // Reset the upload progress bar
+    document.getElementById('progress').style.width = 0;
+    
+    // Update progress (can be used to show progress indicator)
+    xhr.upload.addEventListener("progress", function(e) {
+        var progress = Math.round((e.loaded * 100.0) / e.total);
+        document.getElementById('progress').style.width = progress + "%";
+
+        console.log(`fileuploadprogress data.loaded: ${e.loaded},
+    data.total: ${e.total}`);
+    });
+
+    xhr.onreadystatechange = function(e) {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+        // File uploaded successfully
+        var response = JSON.parse(xhr.responseText);
+        // https://res.cloudinary.com/cloudName/image/upload/v1483481128/public_id.jpg
+        var url = response.secure_url;
+
+        var downloadButton = document.getElementById('fileDownload');
+        downloadButton.href = url;
+        alert(response.url);
+        video_preview.src = url
+        //TODO:  add video rendering here(download file)
+
         }
-        tempCanvas.width = tempW
-        tempCanvas.height = tempH
-        tempctx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-        tempctx.translate(tempCanvas.width, tempCanvas.height);
-        tempctx.rotate(degrees * Math.PI / 180);
-        setInterval(() => {
-            tempctx.drawImage(image, tempImageW, tempImageH);
-        }, 20)
-        tempctx.save();
-        tempctx.restore();
-    }
-    //handle rotate for mobile
+    };
 
-    renderImageVideo = (image) => {
-        const rwh = image.videoWidth / image.videoHeight
-        let newWidth = canvas.width
-        let newHeight = newWidth / rwh
-        if (rwh > 1) {
-            newHeight = canvas.height
-            newWidth = newHeight * rwh
+        fd.append('upload_preset', unsignedUploadPreset);
+        fd.append('tags', 'browser_upload'); // Optional - add tag for image admin in Cloudinary
+        fd.append('file', file);
+        xhr.send(fd);
+    }
+
+    // *********** Handle selected files ******************** //
+    var handleFiles = function(files) {
+        for (var i = 0; i < files.length; i++) {
+            uploadFileVideo(files[i]); // call the function to upload the file
         }
-        const xOffset = rwh > 1 ? ((canvas.width - newWidth) / 2) : 0;
-        const yOffset = rwh <= 1 ? ((canvas.height - newHeight) / 2) : 0;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        // console.log(rwh, xOffset, yOffset, newWidth, newHeight)
-        // streaming(image.duration)
-        // i = setInterval(() => {
-        ctx.drawImage(image, xOffset, yOffset, newWidth, newHeight);
-        ctx.drawImage(frame, 0, 0, canvas.width, canvas.height)
-        // }, 20)
-        ctx.save();
-        ctx.restore()
-    }
+    };
 
-    //handle add fram
-    renderCanvasVideo = (image) => {
-        const rwh = image.videoWidth / image.videoHeight
-        let newWidth = canvas.width
-        let newHeight = newWidth / rwh
-        if (rwh > 1) {
-            newHeight = canvas.height
-            newWidth = newHeight * rwh
-        }
-        const xOffset = rwh > 1 ? ((canvas.width - newWidth) / 2) : 0;
-        const yOffset = rwh <= 1 ? ((canvas.height - newHeight) / 2) : 0;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        // console.log(rwh, xOffset, yOffset, newWidth, newHeight)
-        // streaming(image.duration)
-        i = setInterval(() => {
-            ctx.drawImage(image, xOffset, yOffset, newWidth, newHeight);
-            ctx.drawImage(frame, 0, 0, canvas.width, canvas.height)
-        }, 20)
-        ctx.save();
-        ctx.restore()
-        // loader.style.display = 'none'
-        // canvas.style.display = 'block'
-    }
-    //handle add fram
+    // //handle rotate for mobile
+    // drawRotatedVideo = (degrees, image) => {
+    //     // alert(image.duration)
+    //     // console.log('drawRotatedVideo')
+    //     const tempCanvas = document.createElement('CANVAS')
+    //     const tempctx = tempCanvas.getContext("2d");
+    //     document.body.appendChild(tempCanvas)
 
-    const video = document.createElement('VIDEO')
-    video.setAttribute('autoplay', '')
-    video.setAttribute('playsinline', '')
-    video.muted = 'muted'
-    video.setAttribute('preload', 'auto')
-    // const playDiv = document.getElementById('playDiv')
-    console.log(playDiv)
-    playDiv.onclick = () => {
-        playDiv.style.display = 'none'
-        video.play()
-        renderCanvasVideo(video)
-    }
-    video.onended = () => {
-        clearInterval(i)
-        playDiv.style.display = 'flex'
-    }
+    //     //recorder
+    //     // const chunks = []
+    //     // recorder = new MediaRecorder(tempctx.canvas.captureStream(30));
+    //     // recorder.ondataavailable = (e) => {
+    //     // 	if (e.data.size > 0) {
+    //     // 		chunks.push(e.data);
+    //     // 	}
+    //     // };
+    //     // recorder.onstop = () => {
+    //     // 	const blob = new Blob(chunks, { type: 'video/mp4' });
+    //     // 	const url = window.URL.createObjectURL(blob);
+    //     // 	alert(url)
+    //     // 	const rotatedVideo = document.createElement('VIDEO')
+    //     // 	rotatedVideo.src = url
+    //     // 	rotatedVideo.setAttribute('muted', '')
+    //     // 	rotatedVideo.play()
+    //     // 	rotatedVideo.onloadeddata = () => {
+    //     // 		console.log('onstop')
+    //     // 		renderCanvasVideo(rotatedVideo)
+    //     // 	}
+    //     // };
+    //     // recorder.start()
+    //     // setTimeout(() => {
+    //     // 	recorder.stop()
+    //     // }, image.duration * 1000);
+    //     //recorder
 
-    //handle upload video
-    uploadVideo.onchange = (e) => handleUploadVideo(e)
-    handleUploadVideo = (value) => {
-        video.src = ''
-        clearInterval(i)
-        var source = value.target.files[0]
-        const reader = new FileReader();
-        if (source) {
-            reader.readAsDataURL(source);
-            video.src = URL.createObjectURL(source)
-            video.onloadeddata = () => {
-                playDiv.style.display = 'flex'
-                renderImageVideo(video)
-            }
-        }
-    }
-    //handle upload video
-    //video
+    //     streaming(tempCanvas, image.duration)
 
-    //recorder
-    let recordedChunks = [];
+    //     tempCanvas.height = 300
+    //     tempCanvas.width = 300
+    //     let tempW = image.videoHeight
+    //     let tempH = image.videoWidth
+    //     let tempImageW;
+    //     let tempImageH;
+    //     switch (degrees) {
+    //         case -90:
+    //             tempImageW = 0
+    //             tempImageH = -tempW
+    //             break;
+    //         case 90:
+    //             tempImageW = -tempH
+    //             tempImageH = 0
+    //             break;
+    //         case 180:
+    //             tempW = image.videoWidth
+    //             tempH = image.videoHeight
+    //             tempImageW = 0
+    //             tempImageH = 0
+    //             break;
+    //         default:
+    //             tempW = image.videoWidth
+    //             tempH = image.videoHeight
+    //             tempImageW = -tempW
+    //             tempImageH = -tempH
+    //             break;
+    //     }
+    //     tempCanvas.width = tempW
+    //     tempCanvas.height = tempH
+    //     tempctx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+    //     tempctx.translate(tempCanvas.width, tempCanvas.height);
+    //     tempctx.rotate(degrees * Math.PI / 180);
+    //     setInterval(() => {
+    //         tempctx.drawImage(image, tempImageW, tempImageH);
+    //     }, 20)
+    //     tempctx.save();
+    //     tempctx.restore();
+    // }
+    // //handle rotate for mobile
 
-    streaming = (time) => {
-        recordedChunks = []
-        const stream = canvas.captureStream(25)
-        const options = { mimeType: "video/webm; codecs=vp9" };
-        const mediaRecorder = new MediaRecorder(stream, options);
-        mediaRecorder.ondataavailable = handleDataAvailable;
-        mediaRecorder.start();
-        setTimeout(event => {
-            mediaRecorder.stop();
-        }, time * 1000);
-    }
+    // renderImageVideo = (image) => {
+    //     const rwh = image.videoWidth / image.videoHeight
+    //     let newWidth = canvas.width
+    //     let newHeight = newWidth / rwh
+    //     if (rwh > 1) {
+    //         newHeight = canvas.height
+    //         newWidth = newHeight * rwh
+    //     }
+    //     const xOffset = rwh > 1 ? ((canvas.width - newWidth) / 2) : 0;
+    //     const yOffset = rwh <= 1 ? ((canvas.height - newHeight) / 2) : 0;
+    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //     // console.log(rwh, xOffset, yOffset, newWidth, newHeight)
+    //     // streaming(image.duration)
+    //     // i = setInterval(() => {
+    //     ctx.drawImage(image, xOffset, yOffset, newWidth, newHeight);
+    //     ctx.drawImage(frame, 0, 0, canvas.width, canvas.height)
+    //     // }, 20)
+    //     ctx.save();
+    //     ctx.restore()
+    // }
 
-    handleDataAvailable = (event) => {
-        if (event.data.size > 0) {
-            recordedChunks.push(event.data);
-            download();
-        } else {
-            // ...
-        }
-    }
+    // //handle add fram
+    // renderCanvasVideo = (image) => {
+    //     const rwh = image.videoWidth / image.videoHeight
+    //     let newWidth = canvas.width
+    //     let newHeight = newWidth / rwh
+    //     if (rwh > 1) {
+    //         newHeight = canvas.height
+    //         newWidth = newHeight * rwh
+    //     }
+    //     const xOffset = rwh > 1 ? ((canvas.width - newWidth) / 2) : 0;
+    //     const yOffset = rwh <= 1 ? ((canvas.height - newHeight) / 2) : 0;
+    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //     // console.log(rwh, xOffset, yOffset, newWidth, newHeight)
+    //     // streaming(image.duration)
+    //     i = setInterval(() => {
+    //         ctx.drawImage(image, xOffset, yOffset, newWidth, newHeight);
+    //         ctx.drawImage(frame, 0, 0, canvas.width, canvas.height)
+    //     }, 20)
+    //     ctx.save();
+    //     ctx.restore()
+    //     // loader.style.display = 'none'
+    //     // canvas.style.display = 'block'
+    // }
+    // //handle add fram
 
-    download = () => {
-        // console.log(recordedChunks)
-        var blob = new Blob(recordedChunks, {
-            type: "video/webm"
-        });
-        var url = URL.createObjectURL(blob);
-        // alert(url)
-        console.log(url)
-        const stream = document.createElement('video')
-        stream.src = url
-        stream.muted = 'muted'
-        stream.play()
-        document.body.appendChild(stream)
-        // var a = document.createElement("a");
-        // document.body.appendChild(a);
-        // a.style = "display: none";
-        // a.href = url;
-        // a.download = "test.mp4";
-        // a.click();
-        // window.URL.revokeObjectURL(url);
-    }
-    //recorder
+    // const video = document.createElement('VIDEO')
+    // video.setAttribute('autoplay', '')
+    // video.setAttribute('playsinline', '')
+    // video.muted = 'muted'
+    // video.setAttribute('preload', 'auto')
+    // // const playDiv = document.getElementById('playDiv')
+    // console.log(playDiv)
+    // playDiv.onclick = () => {
+    //     playDiv.style.display = 'none'
+    //     video.play()
+    //     renderCanvasVideo(video)
+    // }
+    // video.onended = () => {
+    //     clearInterval(i)
+    //     playDiv.style.display = 'flex'
+    // }
+
+    // //handle upload video
+    // uploadVideo.onchange = (e) => handleUploadVideo(e)
+    // handleUploadVideo = (value) => {
+    //     video.src = ''
+    //     clearInterval(i)
+    //     var source = value.target.files[0]
+    //     const reader = new FileReader();
+    //     if (source) {
+    //         reader.readAsDataURL(source);
+    //         video.src = URL.createObjectURL(source)
+    //         video.onloadeddata = () => {
+    //             playDiv.style.display = 'flex'
+    //             renderImageVideo(video)
+    //         }
+    //     }
+    // }
+    // //handle upload video
+    // //video
+
+    // //recorder
+    // let recordedChunks = [];
+
+    // streaming = (time) => {
+    //     recordedChunks = []
+    //     const stream = canvas.captureStream(25)
+    //     const options = { mimeType: "video/webm; codecs=vp9" };
+    //     const mediaRecorder = new MediaRecorder(stream, options);
+    //     mediaRecorder.ondataavailable = handleDataAvailable;
+    //     mediaRecorder.start();
+    //     setTimeout(event => {
+    //         mediaRecorder.stop();
+    //     }, time * 1000);
+    // }
+
+    // handleDataAvailable = (event) => {
+    //     if (event.data.size > 0) {
+    //         recordedChunks.push(event.data);
+    //         download();
+    //     } else {
+    //         // ...
+    //     }
+    // }
+
+    // download = () => {
+    //     // console.log(recordedChunks)
+    //     var blob = new Blob(recordedChunks, {
+    //         type: "video/webm"
+    //     });
+    //     var url = URL.createObjectURL(blob);
+    //     // alert(url)
+    //     console.log(url)
+    //     const stream = document.createElement('video')
+    //     stream.src = url
+    //     stream.muted = 'muted'
+    //     stream.play()
+    //     document.body.appendChild(stream)
+    //     // var a = document.createElement("a");
+    //     // document.body.appendChild(a);
+    //     // a.style = "display: none";
+    //     // a.href = url;
+    //     // a.download = "test.mp4";
+    //     // a.click();
+    //     // window.URL.revokeObjectURL(url);
+    // }
+    // //recorder
 
     //upload
     const uploadFile = document.getElementById('upload-file')
@@ -475,8 +618,13 @@ window.onload = () => {
         const type = value.target.files[0].type.split('/')[0]
         if (type === 'image') {
             handleUploadImage(value)
+            canvas.style.display = 'unset'
+            video_preview.style.display = 'none'
         } else {
-            handleUploadVideo(value)
+            //video
+            handleFiles(value)
+            canvas.style.display = 'none'
+            video_preview.style.display = 'unset'
         }
     }
     //upload

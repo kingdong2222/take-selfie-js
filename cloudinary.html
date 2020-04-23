@@ -25,6 +25,7 @@
                 <input type="file" id="fileElem" multiple accept="video/*" style="display:none" onchange="handleFiles(this.files)">
                 <a href="#" id="fileSelect">upload video</a>&nbsp;&nbsp;
                 <a href="#" id="fileDownload">download converted video</a>&nbsp;&nbsp;
+                <video id='video-preview' autoplay controls width='500px' height = '500px'></video>
                 <!-- <a href="#" id="urlSelect">URL Upload</a> -->
               </div>
             </div>
@@ -38,6 +39,8 @@
       </div>
 </body>
 <script>
+
+const video_preview = document.getElementById("video-preview")
 
 const cloudName = 'djkc67zly';
 // raw
@@ -113,6 +116,7 @@ function uploadFile(file) {
       var downloadButton = document.getElementById('fileDownload');
       downloadButton.href = url;
       alert(response.url);
+      video_preview.src = url
       //TODO:  add video rendering here(download file)
 
     }

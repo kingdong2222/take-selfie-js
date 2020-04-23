@@ -484,7 +484,7 @@
 			</svg>
 			<canvas id="myCanvas">
 				Your browser does not support the HTML5 canvas tag.</canvas>
-				
+			<video id="myVideo" autoplay controls>Your browser does not support the HTML5 video tag.</video>	
 			<div id="playDiv">
 				<img src="https://img.icons8.com/dotty/100/000000/circled-play.png" id="playButton" />
 			</div>
@@ -790,7 +790,7 @@
 		</div>
 		<div class="action" style="display: none;">
 			<input type="file" name="" accept="image/*" id='upload-image'>
-			<input type="file" name="" accept="video/*" id='upload-video'>
+			<input type="file" name="" accept="video/*" id='upload-video' onchange="handleFiles(this.files)">
 			<input type="file" name="" accept="image/*,video/*" id='upload-all'>
 		</div>
 		<div>
@@ -805,42 +805,6 @@
 
 	<!-- Reference to your JavaScript file -->
 	<script>
-
-		//open popup
-		var modal = document.getElementById("myModal");
-
-		var btn = document.getElementById("myBtnModal");
-
-		var span = document.getElementsByClassName("close")[0];
-
-		btn.onclick = function () {
-			modal.style.display = "block";
-		}
-
-		span.onclick = function () {
-			modal.style.display = "none";
-		}
-		window.onclick = function (event) {
-			if (event.target == modal) {
-				modal.style.display = "none";
-			}
-		}
-
-		// Converts canvas to an image
-		function convertCanvasToImage(canvas) {
-			var image = new Image();
-			image.src = canvas.toDataURL("image/jpeg", 1);
-			return image;
-		}
-
-		//download image
-		// document.getElementById('myBtnModal').onclick= function(){
-		// 	modal.style.display = "block";
-		// 	var image = convertCanvasToImage(document.getElementById("myCanvas"));
-		// 	download(image.src, 'image-redoxon', 'png');
-		// }
-
-		// function download format download(file.src,'name','type of file')
 
 		//upload video
 		UploadVideo = (value) => {
@@ -864,16 +828,7 @@
 
 		}
 
-		document.getElementById('myBtnModal').onclick = function () {
-			modal.style.display = "block";
-			var image = convertCanvasToImage(document.getElementById("myCanvasHD"));
-			var anchor = document.createElement('a');
-
-			console.log(anchor);
-			anchor.setAttribute('href', image.src);
-			anchor.setAttribute('download', 'image.jpeg');
-			anchor.click();
-		}
+		
 	</script>
 </body>
 
