@@ -638,11 +638,20 @@ function uploadFileVideo(file) {
     // Reset the upload progress bar
     //    document.getElementById('progress').style.width = 0;
 
+    var video_ratio
+    var checkWidthHeighVideo = document.getElementById("checkWidthHeighVideo")
+    checkWidthHeighVideo.addEventListener( "loadedmetadata", function () {
+        // retrieve dimensions
+        let video_height = this.videoHeight;
+        let video_width = this.videoWidth;
+        video_ratio = video_width / video_height
+        console.log('w', video_width)
+        console.log('h', video_height)
+    }, false );
+    
     // Update progress (can be used to show progress indicator)
     xhr.upload.addEventListener("progress", function (e) {
-        var checkWidthHeighVideo = document.getElementById("checkWidthHeighVideo")
-        console.log(checkWidthHeighVideo.offsetHeight)
-        console.log(checkWidthHeighVideo.offsetWidth)
+        
         loading_icon_orange.style.display = 'unset'
         var progress = Math.round((e.loaded * 100.0) / e.total);
         // document.getElementById('progress').style.width = progress + "%";
