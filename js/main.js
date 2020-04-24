@@ -1,3 +1,4 @@
+var check_file_exist = 0
 window.onload = () => {
 
     //open popup
@@ -20,10 +21,8 @@ window.onload = () => {
         }
     }
 
-
     const loading_icon_orange = document.getElementById('svg-loading-orange')
-    const loading_icon_white = document.getElementById('svg-loading-white')
-
+    const imageExample = document.getElementById('imageExample')
     const playDiv = document.getElementById('playDiv')
     playDiv.style.width = innerWidth * 0.71
     playDiv.style.height = innerWidth * 0.71
@@ -47,6 +46,7 @@ window.onload = () => {
         uploadImage.click()
         canvas.style.display = 'unset'
         video_preview.style.display = 'none'
+        
     }
 
 
@@ -93,6 +93,8 @@ window.onload = () => {
         ctx.drawImage(frame, 0, 0, canvas.width, canvas.height)
         ctx.restore()
         loading_icon_orange.style.display = 'none'
+        imageExample.style.display = 'none'
+        check_file_exist = 1
         // loader.style.display = 'none'
         // canvas.style.display = 'block'
     }
@@ -116,6 +118,7 @@ window.onload = () => {
         ctx_hd.drawImage(image, xOffset_hd, yOffset_hd, newWidth, newHeight);
         ctx_hd.drawImage(frame, 0, 0, canvas_hd.width, canvas_hd.height)
         ctx_hd.restore()
+        check_file_exist = 1
     }
     //render canvas hd
 
@@ -302,20 +305,26 @@ window.onload = () => {
         modal.style.display = "block";
         var downloadButton = document.getElementById('doneDownload')
         downloadButton.onclick = () => {
+            if(check_file_exist > 0){
+                if (canvas.style.display == 'unset') {
+                    var image = convertCanvasToImage(document.getElementById("myCanvasHD"));
+                    download(image.src, 'image-redoxon', 'jpeg');
+                } else {
+                    var anchor = document.createElement('a');
+    
+                    // console.log(anchor);
+                    anchor.setAttribute('href', video_preview.src);
+                    anchor.setAttribute('download', 'video-redoxon');
+                    anchor.click();
 
-
-            if (canvas.style.display == 'unset') {
-                var image = convertCanvasToImage(document.getElementById("myCanvasHD"));
-                download(image.src, 'image-redoxon', 'jpeg');
+                    const obj_url = URL.createObjectURL(blob);
+                    video_preview.src = obj_url;
+                    // download(video_preview.src, 'video-redoxon','mp4');
+                }
             } else {
-                var anchor = document.createElement('a');
-
-                // console.log(anchor);
-                anchor.setAttribute('href', video_preview.src);
-                anchor.setAttribute('download', 'video-redoxon');
-                anchor.click();
-                // download(video_preview.src, 'video-redoxon','mp4');
+                alert('Bạn chưa tải ảnh/video lên web!!!')
             }
+            
         }
 
         // var anchor = document.createElement('a');
@@ -545,11 +554,23 @@ window.onload = () => {
             canvas.style.display = 'unset'
             video_preview.style.display = 'none'
         } else {
-            // console.log(value.srcElement)
             //video
             handleFiles(value.srcElement.files)
             canvas.style.display = 'none'
             video_preview.style.display = 'unset'
+            imageExample.style.display = 'none'
+
+            var source = value.target.files[0]
+			var reader = new FileReader();
+			var checkWidthHeighVideo = document.getElementById("checkWidthHeighVideo")
+			reader.onloadend = function () {
+                checkWidthHeighVideo.src = reader.result;
+			}
+			if (source) {
+                reader.readAsDataURL(source);
+			} else {
+				checkWidthHeighVideo.src = "";
+            }
         }
     }
     //upload
@@ -563,6 +584,7 @@ window.onload = () => {
             uploadVideo.click();
             canvas.style.display = 'none'
             video_preview.style.display = 'unset'
+            imageExample.style.display = 'none'
         }
         e.preventDefault(); // prevent navigation to "#"
     }, false);
@@ -606,19 +628,22 @@ const unsignedUploadPreset = 'redoxon-new';
 
 // *********** Upload file to Cloudinary ******************** //
 function uploadFileVideo(file) {
-    var loading_icon_white = document.getElementById('svg-loading-white')
+    
+    var loading_icon_orange = document.getElementById('svg-loading-orange')
     var url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
     var xhr = new XMLHttpRequest();
     var fd = new FormData();
     xhr.open('POST', url, true);
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-
     // Reset the upload progress bar
     //    document.getElementById('progress').style.width = 0;
 
     // Update progress (can be used to show progress indicator)
     xhr.upload.addEventListener("progress", function (e) {
-        loading_icon_white.style.display = 'unset'
+        var checkWidthHeighVideo = document.getElementById("checkWidthHeighVideo")
+        console.log(checkWidthHeighVideo.offsetHeight)
+        console.log(checkWidthHeighVideo.offsetWidth)
+        loading_icon_orange.style.display = 'unset'
         var progress = Math.round((e.loaded * 100.0) / e.total);
         // document.getElementById('progress').style.width = progress + "%";
 
@@ -628,7 +653,7 @@ function uploadFileVideo(file) {
 
     xhr.onreadystatechange = function (e) {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            loading_icon_white.style.display = 'none'
+            loading_icon_orange.style.display = 'none'
             let video_preview = document.getElementById("myVideo");
             // File uploaded successfully
             var response = JSON.parse(xhr.responseText);
@@ -638,6 +663,7 @@ function uploadFileVideo(file) {
             //   alert(response.url);
             console.log(url)
             video_preview.src = url
+            check_file_exist = 1
             //TODO:  add video rendering here(download file)
 
         }
