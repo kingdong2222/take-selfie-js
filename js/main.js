@@ -23,9 +23,9 @@ window.onload = () => {
 
     const loading_icon_orange = document.getElementById('svg-loading-orange')
     const imageExample = document.getElementById('imageExample')
-    const playDiv = document.getElementById('playDiv')
-    playDiv.style.width = innerWidth * 0.71
-    playDiv.style.height = innerWidth * 0.71
+    // const playDiv = document.getElementById('playDiv')
+    // playDiv.style.width = innerWidth * 0.71
+    // playDiv.style.height = innerWidth * 0.71
 
     //upload image
     const imageCamera = document.getElementById('image-camera')
@@ -211,43 +211,34 @@ window.onload = () => {
     //rotate imagehd for mobile
 
     uploadImage.onchange = (value) => {
+        imageCamera.style.display = 'none'
         handleUploadImage(value)
         handleUploadImageHD(value)
     }
 
     handleUploadImage = (e) => {
         clearInterval(i)
-        // video.src = ''
-        // playDiv.style.display = 'none'
         const source = e.target.files[0]
         const reader = new FileReader();
-        // console.log(source)
         reader.readAsDataURL(source);
-        // loader.style.display = 'block'
-        // canvas.style.display = 'none'
         reader.onloadend = () => {
             loading_icon_orange.style.display = 'unset'
             const preview = new Image();
             preview.src = reader.result
             preview.onload = () => {
                 const exif = EXIF.readFromBinaryFile(base64ToArrayBuffer(reader.result));
-                // document.getElementById('concat').innerText = exif.Orientation
                 switch (exif.Orientation) {
                     case 8:
                         drawRotated(-90, preview)
-                        // drawRotatedHD(-90, preview)
                         break;
                     case 3:
                         drawRotated(180, preview)
-                        // drawRotatedHD(180, preview)
                         break;
                     case 6:
                         drawRotated(90, preview)
-                        // drawRotatedHD(90, preview)
                         break;
                     default:
                         drawRotated(0, preview)
-                        // drawRotatedHD(0, preview)
                         break;
                 }
             }
@@ -257,35 +248,25 @@ window.onload = () => {
 
     handleUploadImageHD = (e) => {
         clearInterval(i)
-        // video.src = ''
-        // playDiv.style.display = 'none'
         const source = e.target.files[0]
         const reader = new FileReader();
-        // console.log(source)
         reader.readAsDataURL(source);
-        // loader.style.display = 'block'
-        // canvas.style.display = 'none'
         reader.onloadend = () => {
             const preview = new Image();
             preview.src = reader.result
             preview.onload = () => {
                 const exif = EXIF.readFromBinaryFile(base64ToArrayBuffer(reader.result));
-                // document.getElementById('concat').innerText = exif.Orientation
                 switch (exif.Orientation) {
                     case 8:
-                        // drawRotated(-90, preview)
                         drawRotatedHD(-90, preview)
                         break;
                     case 3:
-                        // drawRotated(180, preview)
                         drawRotatedHD(180, preview)
                         break;
                     case 6:
-                        // drawRotated(90, preview)
                         drawRotatedHD(90, preview)
                         break;
                     default:
-                        // drawRotated(0, preview)
                         drawRotatedHD(0, preview)
                         break;
                 }
