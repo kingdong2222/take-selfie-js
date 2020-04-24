@@ -300,17 +300,22 @@ window.onload = () => {
 
     document.getElementById('myBtnModal').onclick = function () {
         modal.style.display = "block";
-        if (canvas.style.display == 'unset') {
-            var image = convertCanvasToImage(document.getElementById("myCanvasHD"));
-            download(image.src, 'image-redoxon', 'jpeg');
-        } else {
-            // var anchor = document.createElement('a');
+        var downloadButton = document.getElementById('doneDownload')
+        downloadButton.onclick = () => {
 
-            // // console.log(anchor);
-            // anchor.setAttribute('href', video_preview.src);
-            // anchor.setAttribute('download', 'video-redoxon');
-            // anchor.click();
-            download(video_preview.src, 'video-redoxon','mp4');
+
+            if (canvas.style.display == 'unset') {
+                var image = convertCanvasToImage(document.getElementById("myCanvasHD"));
+                download(image.src, 'image-redoxon', 'jpeg');
+            } else {
+                var anchor = document.createElement('a');
+
+                // console.log(anchor);
+                anchor.setAttribute('href', video_preview.src);
+                anchor.setAttribute('download', 'video-redoxon');
+                anchor.click();
+                // download(video_preview.src, 'video-redoxon','mp4');
+            }
         }
 
         // var anchor = document.createElement('a');
