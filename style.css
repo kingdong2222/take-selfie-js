@@ -53,7 +53,7 @@ h2,h4,p{
 }
 .fb-image-frame svg{
     position: relative;
-    z-index: 2;
+    z-index: 3;
 }
 .like-blur{
     position: absolute;
