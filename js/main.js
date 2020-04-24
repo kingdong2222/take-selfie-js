@@ -22,6 +22,7 @@ window.onload = () => {
 
     
     const loading_icon_orange = document.getElementById('svg-loading-orange')
+    const loading_icon_white = document.getElementById('svg-loading-white')
 
     const playDiv = document.getElementById('playDiv')
     playDiv.style.width = innerWidth * 0.71
@@ -533,8 +534,9 @@ window.onload = () => {
             canvas.style.display = 'unset'
             video_preview.style.display = 'none'
         } else {
+            // console.log(value.srcElement)
             //video
-            handleFiles(value)
+            handleFiles(value.srcElement.files)
             canvas.style.display = 'none'
             video_preview.style.display = 'unset'
         }
