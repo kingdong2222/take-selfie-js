@@ -485,7 +485,7 @@
 			<canvas id="myCanvas">
 				Your browser does not support the HTML5 canvas tag.</canvas>
 			
-			<video id="myVideo" autoplay controls preload>Your browser does not support the HTML5 video tag.</video>
+			<video id="myVideo" autoplay controls playsinline poster='images/photoframe.jpg'>Your browser does not support the HTML5 video tag.</video>
 			<div id='svg-loading-orange'>
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;display: block; shape-rendering: auto;" width="180px" height="180px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
 					<circle cx="75" cy="50" fill="#ffa900" r="3">
@@ -876,12 +876,12 @@
 			<input type="file" name="" accept="video/*" id='upload-video' multiple onchange="handleFiles(this.files)">
 			<input type="file" name="" accept="image/*,video/*" id='upload-all'>
 		</div>
-		<div>
+		<div style="display: none;">
 			<!-- <canvas width="300" height="300" id="myCanvas" style="outline:1px solid #d3d3d3;">
 				Your browser does not support the HTML5 canvas tag.</canvas> -->
-			<canvas id="rotate-canvas" style="display: none;"></canvas><br>
-			<canvas id="rotate-canvasHD" style="display: none;"></canvas>><br>
-			<canvas id="myCanvasHD" style="display: none;">
+			<canvas id="rotate-canvas" ></canvas><br>
+			<canvas id="rotate-canvasHD" ></canvas><br>
+			<canvas id="myCanvasHD">
 				Your browser does not support the HTML5 canvas tag.</canvas>
 		</div>
 	</main>
