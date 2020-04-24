@@ -20,7 +20,7 @@ window.onload = () => {
         }
     }
 
-    
+
     const loading_icon_orange = document.getElementById('svg-loading-orange')
     const loading_icon_white = document.getElementById('svg-loading-white')
 
@@ -304,7 +304,13 @@ window.onload = () => {
             var image = convertCanvasToImage(document.getElementById("myCanvasHD"));
             download(image.src, 'image-redoxon', 'jpeg');
         } else {
-            download(video_preview, 'video-redoxon', 'mp4');
+            // var anchor = document.createElement('a');
+
+            // // console.log(anchor);
+            // anchor.setAttribute('href', video_preview.src);
+            // anchor.setAttribute('download', 'video-redoxon');
+            // anchor.click();
+            download(video_preview.src, 'video-redoxon','mp4');
         }
 
         // var anchor = document.createElement('a');
@@ -623,8 +629,9 @@ function uploadFileVideo(file) {
             var response = JSON.parse(xhr.responseText);
             // https://res.cloudinary.com/cloudName/image/upload/v1483481128/public_id.jpg
             var url = response.secure_url;
+            url = url.replace('/upload/', '/upload/fl_attachment/');
             //   alert(response.url);
-            console.log(response)
+            console.log(url)
             video_preview.src = url
             //TODO:  add video rendering here(download file)
 
