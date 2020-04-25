@@ -1,6 +1,5 @@
 var check_file_exist = 0
 window.onload = () => {
-
     //open popup
     var modal = document.getElementById("myModal");
 
@@ -59,8 +58,14 @@ window.onload = () => {
     canvas_hd.width = innerWidth * 2
     canvas_hd.height = innerWidth * 2
 
-    canvas.width = innerWidth * 0.71
-    canvas.height = innerWidth * 0.71
+    if(window.innerWidth < 768){
+        canvas.width = innerWidth * 0.65
+        canvas.height = innerWidth * 0.65
+    } else {
+        canvas.width = innerWidth * 0.48
+        canvas.height = innerWidth * 0.48
+    }
+    
 
     //convert base64 to array buffer
     base64ToArrayBuffer = (base64) => {
