@@ -301,7 +301,7 @@ h2,h4,p{
     left:38%;
     object-fit: contain;
     border-radius: 6px;
-    animation: animate 1s infinite;
+    animation: animate .7s infinite;
     /* box-shadow: 0 9px #FE350E; */
 }
 
