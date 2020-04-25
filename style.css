@@ -87,7 +87,7 @@ h2,h4,p{
     margin: 0 auto;
     justify-content: center;
     align-items: center;
-    /* padding-bottom: 20px; */
+    padding-bottom: 20px;
 }
 .reward-content{
     display: flex;
