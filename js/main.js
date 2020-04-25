@@ -539,12 +539,14 @@ window.onload = () => {
             handleUploadImage(value)
             canvas.style.display = 'unset'
             video_preview.style.display = 'none'
+            imageCamera.style.display = 'none'
         } else {
             //video
             handleFiles(value.srcElement.files)
             canvas.style.display = 'none'
             video_preview.style.display = 'unset'
             imageExample.style.display = 'none'
+            imageCamera.style.display = 'none'
 
             var source = value.target.files[0]
 			var reader = new FileReader();
@@ -568,6 +570,7 @@ window.onload = () => {
     videoCamera.addEventListener("click", function (e) {
         if (uploadVideo) {
             uploadVideo.click();
+            imageCamera.style.display = 'none'
             canvas.style.display = 'none'
             video_preview.style.display = 'unset'
             imageExample.style.display = 'none'
