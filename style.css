@@ -301,18 +301,18 @@ h2,h4,p{
     left:38%;
     object-fit: contain;
     border-radius: 6px;
-    animation: animate .5s infinite;
+    animation: animate 1s infinite;
     /* box-shadow: 0 9px #FE350E; */
 }
 
 @keyframes animate{
 	from {
-        box-shadow: 0 9px #FE350E;
-        transform: translateY(0px);
+        box-shadow:0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff8300, 0 0 10px #ff8300, 0 0 20px #ff8300, 0 0 25px #ff8300, 0 0 30px #ff8300;
+        /* transform: translateY(0px); */
     }
   to {
-      box-shadow: 0 5px #FE350E;
-      transform: translateY(2px);
+      box-shadow: 0 0 8px #fff, 0 0 13px #fff, 0 0 18px #ff8300, 0 0 13px #ff8300, 0 0 23px #ff8300, 0 0 28px #ff8300, 0 0 33px #ff8300;
+      /* transform: translateY(2px); */
     }
 }
 /* iphone 5 */
