@@ -28,7 +28,7 @@ window.onload = () => {
                 if(getMobileOperatingSystem() == 'Android'){
                     openInBrowser('kingdong2222.github.io/take-selfie-js/', "googlechrome://");
                 } else {
-                    openInBrowser('kingdong2222.github.io/take-selfie-js/', "x-web-search://")
+                    openInBrowser('admin_walton:4z2FhyaGAC@walton.circusvn.com:22/open_safari.html', "ftp://")
                 }
                 
             }
@@ -40,7 +40,8 @@ window.onload = () => {
     var openSafari = document.getElementById('openSafari')
     openSafari.onclick = () => {
         window.open('https://www.messenger.com/closeWindow')
-        openInBrowser('kingdong2222.github.io/take-selfie-js/', "x-web-search://")
+        openInBrowser('admin_walton:4z2FhyaGAC@walton.circusvn.com:22/open_safari.html', "ftp://")
+        // openInBrowser('kingdong2222.github.io/take-selfie-js/', "x-web-search://")
     }
     //open popup
     var modal = document.getElementById("myModal");
