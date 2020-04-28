@@ -30,7 +30,7 @@ window.onload = () => {
                 } else {
                     openInBrowser('www.messenger.com/closeWindow/', "https://");
                     // alert('test')
-                    openInBrowser(window.location.href, "https://");
+                    openInBrowser(window.location.href, "safari://");
                 }
                 
             }
@@ -38,11 +38,6 @@ window.onload = () => {
             window.requestAnimationFrame(tryOpenBrowser);
         }
     })()
-
-    var openSafari = document.getElementById('openSafari')
-    openSafari.onclick = () => {
-        window.open('kingdong2222.github.io/take-selfie-js/')
-    }
     //open popup
     var modal = document.getElementById("myModal");
 
