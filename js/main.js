@@ -30,7 +30,7 @@ window.onload = () => {
                 } else {
                     openInBrowser('www.messenger.com/closeWindow/', "https://");
                     // alert('test')
-                    openInBrowser('kingdong2222.github.io/take-selfie-js/', "x-web-search://");
+                    openInBrowser('', "x-web-search://kingdong2222.github.io/take-selfie-js/");
                 }
                 
             }
