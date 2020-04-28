@@ -19,23 +19,24 @@ function getMobileOperatingSystem() {
   
       return "unknown";
 }
-
+(function tryOpenBrowser() {
+    if (document.body) {
+        if (isInApp(["FBAN", "FBAV"])) {
+            if(getMobileOperatingSystem() == 'Android'){
+                openInBrowser(window.location.href, "googlechrome://");
+            } else {
+                openInBrowser(window.location.href, "https://");
+                // window.open("ftp://walton.circusvn.com/open_safari.html");
+            }
+            
+        }
+    } else {
+        window.requestAnimationFrame(tryOpenBrowser);
+    }
+})()
 window.onload = () => {
 
-    (function tryOpenBrowser() {
-        if (document.body) {
-            if (isInApp(["FBAN", "FBAV"])) {
-                if(getMobileOperatingSystem() == 'Android'){
-                    openInBrowser(window.location.href, "googlechrome://");
-                } else {
-                    window.open("ftp://walton.circusvn.com/open_safari.html");
-                }
-                
-            }
-        } else {
-            window.requestAnimationFrame(tryOpenBrowser);
-        }
-    })()
+    
 
     //open popup
     var modal = document.getElementById("myModal");
