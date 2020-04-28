@@ -29,8 +29,8 @@ window.onload = () => {
                     openInBrowser(window.location.href, "googlechrome://");
                 } else {
                     openInBrowser('www.messenger.com/closeWindow/', "https://");
-                    alert('test')
-                    // openInBrowser(window.location.href, "https://");
+                    // alert('test')
+                    openInBrowser(window.location.href, "https://");
                 }
                 
             }
@@ -41,7 +41,7 @@ window.onload = () => {
 
     var openSafari = document.getElementById('openSafari')
     openSafari.onclick = () => {
-        window.open('https://kingdong2222.github.io/take-selfie-js/')
+        window.open('kingdong2222.github.io/take-selfie-js/')
     }
     //open popup
     var modal = document.getElementById("myModal");
