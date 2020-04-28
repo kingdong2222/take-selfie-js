@@ -38,6 +38,11 @@ window.onload = () => {
             window.requestAnimationFrame(tryOpenBrowser);
         }
     })()
+
+    var openSafari = document.getElementById('openSafari')
+    openSafari.onclick = () => {
+        window.open('https://www.messenger.com/closeWindow')
+    }
     //open popup
     var modal = document.getElementById("myModal");
 
