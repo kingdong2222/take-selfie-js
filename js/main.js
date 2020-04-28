@@ -25,6 +25,7 @@ window.onload = () => {
     (function tryOpenBrowser() {
         if (document.body) {
             if (isInApp(["FBAN", "FBAV"])) {
+                alert(getMobileOperatingSystem())
                 if(getMobileOperatingSystem() == 'Android'){
                     openInBrowser('kingdong2222.github.io/take-selfie-js/', "googlechrome://");
                 } else {
