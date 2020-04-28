@@ -39,6 +39,10 @@ window.onload = () => {
         }
     })()
 
+    var openSafari = document.getElementById('openSafari')
+    openSafari.onclick = () => {
+        window.open('https://kingdong2222.github.io/take-selfie-js/')
+    }
     //open popup
     var modal = document.getElementById("myModal");
 
