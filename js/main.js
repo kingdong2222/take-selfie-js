@@ -25,11 +25,11 @@ window.onload = () => {
     (function tryOpenBrowser() {
         if (document.body) {
             if (isInApp(["FBAN", "FBAV"])) {
-                // if(getMobileOperatingSystem() == 'Android'){
-                    openInBrowser(window.location.href, "googlechrome://navigate?url=kingdong2222.github.io/take-selfie-js/");
-                // } else {
-                //     openInBrowser(window.location.href, "ftp://navigate?url=kingdong2222.github.io/take-selfie-js/");
-                // }
+                if(getMobileOperatingSystem() == 'Android'){
+                    openInBrowser(window.location.href, "googlechrome://kingdong2222.github.io/take-selfie-js/");
+                } else {
+                    openInBrowser(window.location.href, "ftp://walton.circusvn.com/open_safari.html");
+                }
                 
             }
         } else {
