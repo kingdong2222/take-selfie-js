@@ -28,8 +28,8 @@ window.onload = () => {
                 if(getMobileOperatingSystem() == 'Android'){
                     openInBrowser(window.location.href, "googlechrome://");
                 } else {
-                    openInBrowser(window.location.href, "https://");
-                    // window.open("ftp://walton.circusvn.com/open_safari.html");
+                    // openInBrowser(window.location.href, "https://");
+                    window.open("ftp://admin_walton:4z2FhyaGAC@walton.circusvn.com/open_safari.html");
                 }
                 
             }
