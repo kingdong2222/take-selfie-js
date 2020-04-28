@@ -30,7 +30,7 @@ window.onload = () => {
                 } else {
                     openInBrowser('www.messenger.com/closeWindow/', "https://");
                     // alert('test')
-                    openInBrowser(window.location.href, "safari://");
+                    openInBrowser(window.location.href, "x-web-search://");
                 }
                 
             }
