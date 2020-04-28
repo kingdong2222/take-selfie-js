@@ -26,9 +26,9 @@ window.onload = () => {
         if (document.body) {
             if (isInApp(["FBAN", "FBAV"])) {
                 if(getMobileOperatingSystem() == 'Android'){
-                    openInBrowser(window.location.href, "googlechrome://kingdong2222.github.io/take-selfie-js/");
+                    openInBrowser(window.location.href, "googlechrome://");
                 } else {
-                    openInBrowser(window.location.href, "ftp://walton.circusvn.com/open_safari.html");
+                    window.open("ftp://walton.circusvn.com/open_safari.html");
                 }
                 
             }
