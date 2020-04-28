@@ -28,9 +28,7 @@ window.onload = () => {
                 if(getMobileOperatingSystem() == 'Android'){
                     openInBrowser('kingdong2222.github.io/take-selfie-js/', "googlechrome://");
                 } else {
-                    openInBrowser('www.messenger.com/closeWindow/', "https://");
-                    // alert('test')
-                    openInBrowser('', "x-web-search://kingdong2222.github.io/take-selfie-js/");
+                    window.open('x-web-search://kingdong2222.github.io/take-selfie-js/')
                 }
                 
             }
