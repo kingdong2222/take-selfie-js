@@ -28,7 +28,8 @@ window.onload = () => {
                 if(getMobileOperatingSystem() == 'Android'){
                     openInBrowser(window.location.href, "googlechrome://");
                 } else {
-                    window.open('https://www.messenger.com/closeWindow/')
+                    openInBrowser('www.messenger.com/closeWindow/', "https://");
+                    alert('test')
                     // openInBrowser(window.location.href, "https://");
                 }
                 
