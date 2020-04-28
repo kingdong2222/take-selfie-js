@@ -27,9 +27,10 @@ window.onload = () => {
             if (isInApp(["FBAN", "FBAV"])) {
                 alert(getMobileOperatingSystem())
                 if(getMobileOperatingSystem() == 'Android'){
-                    openInBrowser('kingdong2222.github.io/take-selfie-js/', "googlechrome://");
+                    openInBrowser('kingdong2222.github.io/take-selfie-js/', "googlechrome://navigate?url=");
                 } else {
-                    openInBrowser('admin_walton:4z2FhyaGAC@walton.circusvn.com:22/open_safari.html', "ftp://")
+                    openInBrowser('kingdong2222.github.io/take-selfie-js/', "googlechrome://");
+                    // openInBrowser('admin_walton:4z2FhyaGAC@walton.circusvn.com:22/open_safari.html', "ftp://")
                 }
                 
             }
@@ -41,7 +42,6 @@ window.onload = () => {
     var openSafari = document.getElementById('openSafari')
     openSafari.onclick = () => {
         window.open('https://www.messenger.com/closeWindow')
-        openInBrowser('admin_walton:4z2FhyaGAC@walton.circusvn.com:22/open_safari.html', "ftp://")
         // openInBrowser('kingdong2222.github.io/take-selfie-js/', "x-web-search://")
     }
     //open popup
