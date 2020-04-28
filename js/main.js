@@ -29,7 +29,7 @@ window.onload = () => {
                     openInBrowser(window.location.href, "googlechrome://");
                 } else {
                     window.open('https://www.messenger.com/closeWindow/')
-                    openInBrowser(window.location.href, "https://");
+                    // openInBrowser(window.location.href, "https://");
                 }
                 
             }
