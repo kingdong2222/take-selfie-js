@@ -40,12 +40,12 @@ window.onload = () => {
             } else {
                 safariText.style.display = 'none'
                 chromeText.style.display = 'unset'
-            }
-            
+            }     
+        } else {
+            main.style.display = 'unset'
+            checkFB.style.display = 'none'
         }
-    } else {
-        window.requestAnimationFrame(tryOpenBrowser);
-    }
+    } 
 
     // (function tryOpenBrowser() {
     //     if (document.body) {
