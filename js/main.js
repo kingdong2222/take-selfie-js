@@ -26,9 +26,10 @@ window.onload = () => {
     var chromeText = document.getElementById('Chrome')
     var main = document.getElementsByTagName('MAIN')[0]
     var checkFB = document.getElementById('checkWebViewFB')
-
+    var backgroundBody = document.getElementsByTagName('BODY')[0]
     if (document.body) {
         if (isInApp(["FBAN", "FBAV"])) {
+            backgroundBody.style.background = `url('images/background-webview.jpg') center center no-repeat`
             main.style.display = 'none'
             checkFB.style.display = 'unset'
             if(getMobileOperatingSystem() == 'Android'){
