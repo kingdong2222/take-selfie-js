@@ -24,14 +24,9 @@ window.onload = () => {
 
     var safariText = document.getElementById('Safari')
     var chromeText = document.getElementById('Chrome')
-    var main = document.getElementsByTagName('MAIN')[0]
     var checkFB = document.getElementById('checkWebViewFB')
-    var backgroundBody = document.getElementsByTagName('BODY')[0]
     if (document.body) {
         if (isInApp(["FBAN", "FBAV"])) {
-            backgroundBody.style.background = `url('images/background-webview.jpg') center center no-repeat`
-            // backgroundBody.style.background = 'unset'
-            main.style.display = 'none'
             checkFB.style.display = 'unset'
             if(getMobileOperatingSystem() == 'Android'){
                 safariText.style.display = 'none'
@@ -44,7 +39,6 @@ window.onload = () => {
                 chromeText.style.display = 'unset'
             }     
         } else {
-            main.style.display = 'unset'
             checkFB.style.display = 'none'
         }
     } 

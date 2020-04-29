@@ -309,38 +309,38 @@ h2,h4,p{
     animation: animate .7s infinite;
     /* box-shadow: 0 9px #FE350E; */
 }
-/* #checkWebViewFB{
-    background: url('images/background-webview.jpg') center center no-repeat;
-} */
+#checkWebViewFB{
+    position: absolute;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 1000;
+}
 #checkWebViewFB .logo{
     position: fixed;
 }
 #checkWebViewFB .arrow{
     position: absolute;
-    right: 2.5rem;
-    top: 1.5rem;
-    width: 80px;
-    transform: rotate(30deg);
-    display: none;
+    right: .5rem;
+    top: 2rem;
+    width: 40px;
+    -webkit-transform: scaleX(-1) rotate(-100deg);
+    transform: scaleX(-1) rotate(-100deg);
 }
 .warningWebviewFB{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 70%;
+    width: 95%;
+    height: 15%;
     overflow: hidden;
 }
 .warningWebviewFB p{
-    text-align: center;
-    font-size: 28px;
-    line-height: 50px;
+    font-size: 14px;    
     padding: 0 1.5rem;
-    color: #fff;
+    color: #ff8300;
 }
 .warningWebviewFB p span{
     font-weight: 700;
-    font-size: 52px;
+    font-size: 20px;
     /* text-decoration: underline; */
     display: inline-block;
 }
@@ -435,9 +435,14 @@ h2,h4,p{
         width: 100px;
     }
     .warningWebviewFB{
-        width: 70%;
-        height: 60%;
-        margin: 0 auto;
+        width: 80%;
+        height: 15%;
+    }
+    .warningWebviewFB p{
+        font-size: 24px;    
+    }
+    .warningWebviewFB p span{
+        font-size: 36px;
     }
 }
 /* desktop */
