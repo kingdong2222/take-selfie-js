@@ -309,9 +309,9 @@ h2,h4,p{
     animation: animate .7s infinite;
     /* box-shadow: 0 9px #FE350E; */
 }
-/* #checkWebViewFB{
+#checkWebViewFB{
     background: url('images/background-webview.jpg') center center no-repeat;
-} */
+}
 #checkWebViewFB .logo{
     position: fixed;
 }
@@ -328,7 +328,7 @@ h2,h4,p{
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 70%;
+    height: 85%;
     overflow: hidden;
 }
 .warningWebviewFB p{

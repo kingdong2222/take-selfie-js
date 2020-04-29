@@ -29,7 +29,8 @@ window.onload = () => {
     var backgroundBody = document.getElementsByTagName('BODY')[0]
     if (document.body) {
         if (isInApp(["FBAN", "FBAV"])) {
-            backgroundBody.style.background = `url('images/background-webview.jpg') center center no-repeat`
+            // backgroundBody.style.background = `url('images/background-webview.jpg') center center no-repeat`
+            backgroundBody.style.background = 'unset'
             main.style.display = 'none'
             checkFB.style.display = 'unset'
             if(getMobileOperatingSystem() == 'Android'){
