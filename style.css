@@ -319,6 +319,7 @@ h2,h4,p{
     top: 1.5rem;
     width: 80px;
     transform: rotate(30deg);
+    z-index: 1000;
 }
 .warningWebviewFB{
     display: flex;
