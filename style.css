@@ -310,6 +310,31 @@ h2,h4,p{
     /* box-shadow: 0 9px #FE350E; */
 }
 
+#checkWebViewFB .logo{
+    position: fixed;
+}
+.warningWebviewFB{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.warningWebviewFB p{
+    text-align: center;
+    font-size: 28px;
+    line-height: 50px;
+    padding: 0 1.5rem;
+    color: #fff;
+}
+.warningWebviewFB p span{
+    font-weight: 700;
+    font-size: 52px;
+    /* text-decoration: underline; */
+    display: inline-block;
+} 
+
 @keyframes animate{
 	from {
         box-shadow:0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff8300, 0 0 10px #ff8300, 0 0 20px #ff8300, 0 0 25px #ff8300, 0 0 30px #ff8300;

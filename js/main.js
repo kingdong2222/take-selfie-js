@@ -22,6 +22,31 @@ function getMobileOperatingSystem() {
 
 window.onload = () => {
 
+    var safariText = document.getElementById('Safari')
+    var chromeText = document.getElementById('Chrome')
+    var main = document.getElementsByTagName('MAIN')[0]
+    var checkFB = document.getElementById('checkWebViewFB')
+
+    if (document.body) {
+        if (isInApp(["FBAN", "FBAV"])) {
+            main.style.display = 'none'
+            checkFB.style.display = 'unset'
+            if(getMobileOperatingSystem() == 'Android'){
+                safariText.style.display = 'none'
+                chromeText.style.display = 'unset'
+            } else if(getMobileOperatingSystem() == 'iOS'){
+                safariText.style.display = 'unset'
+                chromeText.style.display = 'none'
+            } else {
+                safariText.style.display = 'none'
+                chromeText.style.display = 'unset'
+            }
+            
+        }
+    } else {
+        window.requestAnimationFrame(tryOpenBrowser);
+    }
+
     (function tryOpenBrowser() {
         if (document.body) {
             if (isInApp(["FBAN", "FBAV"])) {
@@ -38,11 +63,6 @@ window.onload = () => {
         }
     })()
 
-    var openSafari = document.getElementById('openSafari')
-    openSafari.onclick = () => {
-        window.open('https://www.messenger.com/closeWindow')
-        // openInBrowser('kingdong2222.github.io/take-selfie-js/', "x-web-search://")
-    }
     //open popup
     var modal = document.getElementById("myModal");
 
