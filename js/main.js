@@ -47,21 +47,21 @@ window.onload = () => {
         window.requestAnimationFrame(tryOpenBrowser);
     }
 
-    (function tryOpenBrowser() {
-        if (document.body) {
-            if (isInApp(["FBAN", "FBAV"])) {
-                if(getMobileOperatingSystem() == 'Android'){
-                    openInBrowser('kingdong2222.github.io/take-selfie-js/', "googlechrome://navigate?url=");
-                } else {
-                    openInBrowser('kingdong2222.github.io/take-selfie-js/', "googlechrome://");
-                    // openInBrowser('admin_walton:4z2FhyaGAC@walton.circusvn.com:22/open_safari.html', "ftp://")
-                }
+    // (function tryOpenBrowser() {
+    //     if (document.body) {
+    //         if (isInApp(["FBAN", "FBAV"])) {
+    //             if(getMobileOperatingSystem() == 'Android'){
+    //                 openInBrowser('kingdong2222.github.io/take-selfie-js/', "googlechrome://navigate?url=");
+    //             } else {
+    //                 openInBrowser('kingdong2222.github.io/take-selfie-js/', "googlechrome://");
+    //                 // openInBrowser('admin_walton:4z2FhyaGAC@walton.circusvn.com:22/open_safari.html', "ftp://")
+    //             }
                 
-            }
-        } else {
-            window.requestAnimationFrame(tryOpenBrowser);
-        }
-    })()
+    //         }
+    //     } else {
+    //         window.requestAnimationFrame(tryOpenBrowser);
+    //     }
+    // })()
 
     //open popup
     var modal = document.getElementById("myModal");
