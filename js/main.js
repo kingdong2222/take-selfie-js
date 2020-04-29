@@ -387,6 +387,7 @@ window.onload = () => {
         const type = value.target.files[0].type.split('/')[0]
         if (type === 'image') {
             handleUploadImage(value)
+            handleUploadImageHD(value)
             canvas.style.display = 'unset'
             video_preview.style.display = 'none'
             imageCamera.style.display = 'none'
