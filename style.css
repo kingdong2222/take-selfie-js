@@ -337,6 +337,7 @@ h2,h4,p{
     font-size: 14px;    
     padding: 0 1.5rem;
     color: #ff8300;
+    padding-left: .5rem;
 }
 .warningWebviewFB p span{
     font-weight: 700;
