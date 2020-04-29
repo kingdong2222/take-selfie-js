@@ -320,7 +320,7 @@ h2,h4,p{
 #checkWebViewFB .arrow{
     position: absolute;
     right: .5rem;
-    top: 2rem;
+    top: 1.5rem;
     width: 40px;
     -webkit-transform: scaleX(-1) rotate(-100deg);
     transform: scaleX(-1) rotate(-100deg);
