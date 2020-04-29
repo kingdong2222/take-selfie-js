@@ -21,8 +21,6 @@ function getMobileOperatingSystem() {
 }
 
 window.onload = () => {
-    var mainBlock = document.getElementsByTagName('MAIN')[0]
-    mainBlock.style.display = 'unset'
     var safariText = document.getElementById('Safari')
     var chromeText = document.getElementById('Chrome')
     var checkFB = document.getElementById('checkWebViewFB')
